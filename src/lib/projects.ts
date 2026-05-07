@@ -44,7 +44,7 @@ export const projects: Project[] = [
     location: 'MIHAN SEZ, Nagpur',
     date: 'January 2026',
     mainImage: '/images/office-relocation.png',
-    gallery: ['/images/office-relocation.png', '/images/hero-bg.png'],
+    gallery: ['/images/office-relocation.png', '/images/vehicle-transport.png'],
     description: 'Relocated a 200-seater IT office from MIHAN to Wardha Road. The project required minimal downtime and secure handling of server racks and workstations.',
     features: [
       'Anti-static server packing',

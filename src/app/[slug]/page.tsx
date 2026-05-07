@@ -178,7 +178,7 @@ export default function DynamicSEOPage({ params }: Props) {
       
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/10 to-background pt-24 pb-20 border-b border-border text-center overflow-hidden">
-        <div className="container mx-auto px-4 max-w-4xl relative mobile-95-container">
+        <div className="container mx-auto px-4 max-w-4xl relative">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -z-10" />
           
           <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary mb-8 animate-in fade-in slide-in-from-top-4 duration-700">
@@ -218,7 +218,7 @@ export default function DynamicSEOPage({ params }: Props) {
 
 
       {/* Main Content Area */}
-      <section className="py-20 w-full px-2 lg:px-8 mx-auto mobile-95-container">
+      <section className="py-20 w-full px-2 lg:px-8 mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           
           {/* Left Column (Main SEO Content) */}

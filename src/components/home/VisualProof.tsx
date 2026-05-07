@@ -9,21 +9,21 @@ const MOMENTS = [
     desc: "GPS-enabled enclosed containers for zero-damage transit.",
     icon: <Truck size={24} />,
     color: "from-blue-500/20 to-transparent",
-    image: "/images/hero-bg.png" // Placeholder
+    image: "/images/vehicle-transport.png"
   },
   {
     title: "Expert Packing Team",
     desc: "15+ years of experience in handling fragile and high-value assets.",
     icon: <Users size={24} />,
     color: "from-primary/20 to-transparent",
-    image: "/images/hero-bg.png" // Placeholder
+    image: "/images/house-shifting.png"
   },
   {
     title: "Secure Warehousing",
     desc: "CCTV-monitored, fire-proof storage for short and long term.",
     icon: <Warehouse size={24} />,
     color: "from-emerald-500/20 to-transparent",
-    image: "/images/hero-bg.png" // Placeholder
+    image: "/images/warehouse-storage.png"
   }
 ];
 

@@ -11,7 +11,8 @@ const POSTS = [
     category: "Cost Guides",
     readTime: "8 min read",
     date: "May 10, 2024",
-    image: "/images/hero-bg.png"
+    image: "/images/hero-bg.png",
+    slug: "moving-charges-india-2024"
   },
   {
     title: "How to Safely Pack Electronics for a Long-Distance Move",
@@ -19,7 +20,8 @@ const POSTS = [
     category: "Relocation Tips",
     readTime: "5 min read",
     date: "May 12, 2024",
-    image: "/images/hero-bg.png"
+    image: "/images/hero-bg.png",
+    slug: "pack-electronics-for-moving"
   },
   {
     title: "IBA Approved Packers and Movers: Why It Matters",
@@ -27,7 +29,8 @@ const POSTS = [
     category: "Industry Insights",
     readTime: "6 min read",
     date: "May 15, 2024",
-    image: "/images/hero-bg.png"
+    image: "/images/hero-bg.png",
+    slug: "iba-approved-packers-movers"
   }
 ];
 
@@ -52,7 +55,7 @@ export default function BlogIndex() {
              Comprehensive guides, cost breakdowns, and professional tips to help you navigate your next relocation with confidence.
            </p>
 
-           <div className="relative max-w-xl mx-auto pt-8">
+           <div className="relative max-w-xl mx-auto mt-8">
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-white/40" size={20} />
               <input 
                 type="text" 
@@ -71,37 +74,38 @@ export default function BlogIndex() {
                whileInView={{ opacity: 1, y: 0 }}
                viewport={{ once: true }}
                transition={{ delay: i * 0.1 }}
-               className="group flex flex-col bg-section rounded-[2.5rem] border border-border overflow-hidden hover:border-primary/50 transition-all duration-500"
              >
-                <div className="relative h-64 overflow-hidden">
-                   <Image 
-                     src={post.image} 
-                     alt={post.title} 
-                     fill 
-                     className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-100" 
-                   />
-                   <div className="absolute top-6 left-6 px-3 py-1 rounded-full bg-primary text-white text-[10px] font-black uppercase tracking-widest">
-                     {post.category}
-                   </div>
-                </div>
+               <Link href={`/blog/${post.slug}`} className="group flex flex-col h-full bg-section rounded-[2.5rem] border border-border overflow-hidden hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10">
+                 <div className="relative h-64 overflow-hidden">
+                    <Image 
+                      src={post.image} 
+                      alt={post.title} 
+                      fill 
+                      className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-100" 
+                    />
+                    <div className="absolute top-6 left-6 px-3 py-1 rounded-full bg-primary text-white text-[10px] font-black uppercase tracking-widest">
+                      {post.category}
+                    </div>
+                 </div>
 
-                <div className="p-8 flex-1 flex flex-col">
-                   <div className="flex items-center gap-4 text-[10px] font-bold text-white/40 uppercase tracking-widest mb-4">
-                      <div className="flex items-center gap-1.5"><Clock size={12}/> {post.readTime}</div>
-                      <div className="h-1 w-1 rounded-full bg-white/20" />
-                      <div>{post.date}</div>
-                   </div>
-                   <h3 className="text-xl font-bold text-white mb-4 group-hover:text-primary transition-colors leading-tight">
-                     {post.title}
-                   </h3>
-                   <p className="text-sm text-white/60 leading-relaxed mb-8 flex-1">
-                     {post.excerpt}
-                   </p>
-                   
-                   <Link href="#" className="inline-flex items-center gap-2 text-xs font-black text-primary uppercase tracking-widest group/link">
-                     Read Full Article <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
-                   </Link>
-                </div>
+                 <div className="p-8 flex-1 flex flex-col">
+                    <div className="flex items-center gap-4 text-[10px] font-bold text-white/40 uppercase tracking-widest mb-4">
+                       <div className="flex items-center gap-1.5"><Clock size={12}/> {post.readTime}</div>
+                       <div className="h-1 w-1 rounded-full bg-white/20" />
+                       <div>{post.date}</div>
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-4 group-hover:text-primary transition-colors leading-tight">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-white/60 leading-relaxed mb-8 flex-1">
+                      {post.excerpt}
+                    </p>
+                    
+                    <div className="inline-flex items-center gap-2 text-xs font-black text-primary uppercase tracking-widest group/link">
+                      Read Full Article <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                    </div>
+                 </div>
+               </Link>
              </motion.div>
            ))}
         </div>

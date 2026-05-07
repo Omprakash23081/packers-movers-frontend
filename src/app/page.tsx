@@ -22,27 +22,27 @@ export default function Home() {
     <div className="flex flex-col min-h-screen w-full overflow-hidden">
 
       {/* HERO SECTION */}
-      <section className="relative pt-16 pb-32 md:pt-24 lg:pt-28 lg:pb-40 overflow-hidden bg-background">
+      <section className="relative min-h-[calc(100vh-88px)] flex items-center py-16 md:py-24 lg:py-0 overflow-hidden bg-background">
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
           {/* Abstract mesh and image background */}
           <Image
-            src="/images/hero-bg.png"
+            src="/images/h3ero-bg.png"
             alt="Sunita Cargo Packers and Movers Background"
             fill
             sizes="100vw"
-            className="object-cover opacity-80 dark:opacity-60 pointer-events-none"
+            className="object-cover opacity-100 dark:opacity-80 pointer-events-none"
             priority
             loading="eager"
             fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/20 dark:from-background/95 dark:via-background/70 dark:to-background/30" />
-          <div className="absolute inset-0 bg-gradient-mesh opacity-5 dark:opacity-10" />
-          <div className="absolute top-0 w-full h-full bg-grid-black/[0.02] dark:bg-grid-white/[0.02]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-transparent dark:from-background/95 dark:via-background/70 dark:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-mesh opacity-10 dark:opacity-20" />
+          <div className="absolute top-0 w-full h-full bg-grid-black/[0.03] dark:bg-grid-white/[0.03]" />
         </div>
 
         <div className="container relative z-10 mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-            
+
             <HeroContent />
             <div className="hidden lg:block">
               <HeroForm />
@@ -58,20 +58,18 @@ export default function Home() {
       </div>
 
       <CostCalculator />
-      <div className="mobile-95-container mx-auto">
-        <VisualProof />
-        <ServiceCards />
-        <GoogleReviews />
-        <AboutUs />
-        <Stats />
-        <Gallery />
-        <VideoTestimonials />
-        <ReviewsWidget />
-        <ConnectWithUs />
-        <PricingGuide />
-        <LocationGrid />
-        <FAQ />
-      </div>
+      <ServiceCards />
+      <ConnectWithUs />
+      <PricingGuide />
+      <AboutUs />
+      <Gallery />
+      <Stats />
+      <GoogleReviews />
+      <VideoTestimonials />
+      <VisualProof />
+      <ReviewsWidget />
+      <LocationGrid />
+      <FAQ />
 
     </div>
   );
