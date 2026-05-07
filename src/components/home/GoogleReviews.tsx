@@ -50,8 +50,8 @@ export default function GoogleReviews() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
       
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-16">
+      <div className="w-full px-0 sm:px-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-16 px-4 sm:px-0 text-center md:text-left">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary font-black text-[10px] uppercase tracking-widest mb-4">
               <ShieldCheck size={14} /> Verified Social Proof
@@ -90,7 +90,7 @@ export default function GoogleReviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-background border border-border p-8 rounded-[2.5rem] shadow-lg hover:border-primary/30 transition-all group relative"
+              className="bg-background border-y sm:border border-border p-8 rounded-none sm:rounded-[2.5rem] shadow-lg hover:border-primary/30 transition-all group relative"
             >
               <div className="absolute top-8 right-8">
                 <svg viewBox="0 0 24 24" className="w-5 h-5 opacity-20 group-hover:opacity-100 transition-opacity fill-current">

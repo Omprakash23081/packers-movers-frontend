@@ -33,7 +33,7 @@ export default function AboutUs() {
       <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 rounded-l-full blur-3xl -z-10" aria-hidden="true" />
       <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-primary/5 rounded-tr-full blur-3xl -z-10" aria-hidden="true" />
 
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="w-full px-0 sm:px-4 md:px-6">
         <div className="flex flex-col lg:flex-row gap-16 items-center">
 
           {/* Left Side: Images & Trust Badges */}
@@ -42,9 +42,10 @@ export default function AboutUs() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="lg:w-1/2 relative min-h-[500px] w-full"
+            className="lg:w-1/2 relative min-h-[400px] md:min-h-[500px] w-full"
           >
-            <div className="relative w-full h-[500px] rounded-3xl overflow-hidden shadow-2xl z-10">
+            <div className="relative w-full h-[400px] md:h-[500px] rounded-none sm:rounded-3xl overflow-hidden shadow-2xl z-10">
+
               <Image
                 src="/images/warehouse-storage.png"
                 alt="Sunita Cargo Packers and Movers Team"
@@ -91,7 +92,7 @@ export default function AboutUs() {
           </motion.div>
 
           {/* Right Side: Story & Features */}
-          <div className="lg:w-1/2 space-y-8">
+          <div className="lg:w-1/2 space-y-8 px-6 md:px-0">
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

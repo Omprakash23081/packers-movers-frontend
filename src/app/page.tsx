@@ -45,34 +45,35 @@ export default function Home() {
 
         <div className="container relative z-10 mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-
             <HeroContent />
             <div className="hidden lg:block">
               <HeroForm />
             </div>
-
           </div>
         </div>
       </section>
 
       {/* Mobile-only form before calculator */}
-      <div className="lg:hidden w-full px-2 -mt-8 mb-8">
-        <HeroForm />
+      <div className="lg:hidden w-full px-0 -mt-12 mb-8 relative z-20">
+        <div className="mobile-95-container">
+          <HeroForm />
+        </div>
       </div>
+
 
       <CostCalculator />
       <ServiceCards />
       <WhyChooseUs />
-      <ProcessFlow />
       <PricingGuide />
+      <ConnectWithUs />
+      <ProcessFlow />
       <AboutUs />
-      <Stats />
       <GoogleReviews />
-      <VideoTestimonials />
+      <Stats />
       <Gallery />
       <VisualProof />
-      <ConnectWithUs />
       <ReviewsWidget />
+      <VideoTestimonials />
       <LocationGrid />
       <FAQ />
 

@@ -47,17 +47,17 @@ const services = [
 export default function ServiceCards() {
   return (
     <section id="services" className="py-24 bg-background">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-            Premium Shifting <span className="text-primary">Services</span>
+      <div className="w-full px-0 sm:px-4 md:px-6">
+        <div className="text-center mb-16 space-y-4 px-4">
+          <h2 className="text-3xl md:text-5xl font-black tracking-tight">
+            Premium Shifting <span className="text-primary italic">Services</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-medium">
             From local shifting within Nagpur to interstate relocations, we provide end-to-end logistics solutions tailored to your needs.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -65,10 +65,12 @@ export default function ServiceCards() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="w-full"
             >
               <Link href={service.href} className="block group h-full">
                 <TiltCard tiltMax={10} className="h-full">
-                  <Card className="h-full border-border/50 hover:border-primary/30 transition-all duration-500 group-hover:-translate-y-3 shadow-sm hover:shadow-2xl bg-white dark:bg-black/40 relative overflow-hidden flex flex-col">
+                  <Card className="h-full border-border/50 hover:border-primary/30 transition-all duration-500 group-hover:-translate-y-3 shadow-sm hover:shadow-2xl bg-white dark:bg-black/40 relative overflow-hidden flex flex-col rounded-none sm:rounded-2xl">
+
                     {/* Image Header */}
                     <div className="relative w-full h-48 overflow-hidden rounded-t-xl">
                       <NextImage

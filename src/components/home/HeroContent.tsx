@@ -11,8 +11,9 @@ export default function HeroContent() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="flex flex-col space-y-6 md:space-y-8 relative z-20 -mt-10 sm:-mt-16"
+      className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 md:space-y-8 relative z-20 -mt-10 sm:-mt-16"
     >
+
       <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 sm:px-4 py-1.5 text-[10px] sm:text-sm font-bold text-primary w-fit shadow-sm backdrop-blur-md uppercase tracking-widest">
         <Star size={14} className="mr-1.5 sm:mr-2 fill-primary" aria-hidden="true" />
         #1 IBA-Approved Packers and Movers in Nagpur

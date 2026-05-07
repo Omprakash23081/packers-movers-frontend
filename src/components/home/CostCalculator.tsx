@@ -257,8 +257,9 @@ export default function CostCalculator() {
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] -z-10" />
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[100px] -z-10" />
 
-      <div className="w-full px-2">
-        <div className="max-w-5xl mx-auto">
+      <div className="w-full px-0 sm:px-4">
+        <div className="max-w-7xl mx-auto">
+
           <div className="text-center mb-16 space-y-4">
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
@@ -277,7 +278,7 @@ export default function CostCalculator() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Input Form Column */}
             <div className="lg:col-span-7 space-y-6">
-              <Card className="glass-panel border-none bg-white/5 backdrop-blur-3xl !rounded-[2.5rem] shadow-2xl overflow-hidden">
+              <Card className="glass-panel border-none bg-white/5 backdrop-blur-3xl rounded-none sm:rounded-[2.5rem] shadow-2xl overflow-hidden">
                 {/* Category Tabs Inside Card */}
                 <div className="bg-white/5 border-b border-white/10 p-4">
                   <div className="flex p-1 bg-black/20 rounded-xl overflow-x-auto scrollbar-none">

@@ -35,7 +35,7 @@ export default function Stats() {
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-secondary opacity-90" />
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10 mix-blend-overlay" />
       
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+      <div className="w-full px-0 sm:px-6 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 md:gap-4 text-center">
           {stats.map((stat, index) => (
             <motion.div

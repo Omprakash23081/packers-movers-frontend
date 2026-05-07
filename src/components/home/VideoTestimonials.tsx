@@ -49,7 +49,7 @@ const marqueeItems = [...videoTestimonials, ...videoTestimonials];
 export default function VideoTestimonials() {
   return (
     <section className="py-24 bg-background relative overflow-hidden border-y border-border/50">
-      <div className="container mx-auto px-4 md:px-6 mb-16">
+      <div className="w-full px-4 md:px-6 mb-16">
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-4 mb-2">
             <div className="h-px w-12 md:w-24 bg-red-500/30" />

@@ -20,7 +20,7 @@ export default function Gallery() {
 
   return (
     <section className="py-24 bg-muted/20 relative">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="w-full px-0 sm:px-4 md:px-6">
         <div className="text-center mb-16 space-y-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -62,7 +62,7 @@ export default function Gallery() {
               className={`relative w-full ${item.height} break-inside-avoid`}
             >
               <Link href={`/projects/${item.slug}`} className="block w-full h-full">
-                <TiltCard tiltMax={15} className="w-full h-full rounded-3xl overflow-hidden shadow-xl group cursor-pointer">
+                <TiltCard tiltMax={15} className="w-full h-full rounded-none sm:rounded-3xl overflow-hidden shadow-xl group cursor-pointer">
                   <Image
                     src={item.mainImage}
                     alt={item.title}

@@ -54,7 +54,7 @@ export default function FAQ() {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -z-10" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px] -z-10" />
 
-      <div className="container mx-auto px-4 md:px-6 max-w-4xl">
+      <div className="w-full px-4 sm:px-6 relative z-10 max-w-4xl mx-auto">
         <div className="text-center mb-16 space-y-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -95,7 +95,7 @@ export default function FAQ() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 * index }}
-              className={`border rounded-2xl bg-white dark:bg-black/50 overflow-hidden transition-all duration-300 ${
+              className={`border-y sm:border rounded-none sm:rounded-2xl bg-white dark:bg-black/50 overflow-hidden transition-all duration-300 ${
                 openIndex === index 
                   ? 'border-primary/50 shadow-lg shadow-primary/5' 
                   : 'border-border/60 hover:border-primary/30 shadow-sm'
