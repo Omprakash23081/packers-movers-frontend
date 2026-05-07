@@ -48,7 +48,10 @@ const services = [
 ];
 
 // Content Generation Helpers
-const getTitleCase = (str: string) => str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+const getTitleCase = (str: string) => {
+  if (!str) return '';
+  return str.split('-').map(word => (word.charAt(0) || '').toUpperCase() + word.slice(1)).join(' ');
+};
 
 export async function generateStaticParams() {
   const params: { slug: string }[] = [];
@@ -103,6 +106,7 @@ type SlugData =
   | { type: 'locality', service: string, locality: string, city: string };
 
 function parseSlug(slug: string): SlugData | null {
+  if (!slug) return null;
   // Pattern 1: [from]-to-[to]-[service]
   const routeMatch = slug.match(/^([a-z-]+)-to-([a-z-]+)-(packers-movers|car-transport|home-shifting|office-relocation|bike-transport|warehouse-storage)$/);
   if (routeMatch) {
@@ -154,13 +158,14 @@ function parseSlug(slug: string): SlugData | null {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = parseSlug(params.slug);
+  const slug = params?.slug || '';
+  const data = parseSlug(slug);
   if (!data) return { title: 'Not Found' };
 
   // Normalize canonical URL to packers-and-movers to avoid duplicate content
-  const normalizedSlug = params.slug.startsWith('packers-movers-') 
-    ? params.slug.replace('packers-movers-', 'packers-and-movers-')
-    : params.slug;
+  const normalizedSlug = slug.startsWith('packers-movers-') 
+    ? slug.replace('packers-movers-', 'packers-and-movers-')
+    : slug;
   const canonicalUrl = `https://sunitacargopackersmovers.com/${normalizedSlug}`;
 
   const serviceName = getTitleCase(data.service);
@@ -198,7 +203,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function DynamicSEOPage({ params }: Props) {
-  const data = parseSlug(params.slug);
+  const slug = params?.slug || '';
+  const data = parseSlug(slug);
   if (!data) notFound();
 
   const isRoute = data.type === 'route';

@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/Button';
 import { Metadata } from 'next';
 import { blogContent } from '@/lib/blog-content';
 
+import { notFound } from 'next/navigation';
+
 export async function generateStaticParams() {
   // These should match the slugs in your content calendar
   return [
@@ -19,7 +21,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const title = params.slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  const slug = params?.slug || '';
+  if (!slug) return { title: 'Blog | Sunita Cargo' };
+  
+  const title = slug.split('-').map(word => (word.charAt(0) || '').toUpperCase() + word.slice(1)).join(' ');
   return {
     title: `${title} | Relocation Guide | Sunita Cargo`,
     description: `Expert guide on ${title.toLowerCase()}. Learn professional tips and strategies for a stress-free relocation with Sunita Cargo Packers Movers.`,
@@ -27,7 +32,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
-  const title = params.slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  const slug = params?.slug || '';
+  if (!slug) return notFound();
+  
+  const title = slug.split('-').map(word => (word.charAt(0) || '').toUpperCase() + word.slice(1)).join(' ');
 
   return (
     <div className="min-h-screen pb-20">

@@ -120,13 +120,16 @@ export const cityData: Record<string, CityTrait> = {
 };
 
 // Default traits for cities not explicitly defined
-export const getDefaultTraits = (cityName: string): CityTrait => ({
-  name: cityName.charAt(0).toUpperCase() + cityName.slice(1),
-  tier: 'tier2',
-  landmarks: ['local landmarks'],
-  neighbors: ['nearby localities'],
-  trafficLevel: 'medium'
-});
+export const getDefaultTraits = (cityName: string): CityTrait => {
+  const safeName = cityName || 'India';
+  return {
+    name: (safeName.charAt(0) || '').toUpperCase() + safeName.slice(1),
+    tier: 'tier2',
+    landmarks: ['local landmarks'],
+    neighbors: ['nearby localities'],
+    trafficLevel: 'medium'
+  };
+};
 
 export const getCityTrait = (citySlug: string): CityTrait => {
   const slug = citySlug.toLowerCase().replace(/[\s-]/g, '');

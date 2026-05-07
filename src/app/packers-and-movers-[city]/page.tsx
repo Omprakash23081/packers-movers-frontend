@@ -3,20 +3,28 @@ import dynamic from 'next/dynamic';
 import LocalBusinessSchema from '@/components/seo/LocalBusinessSchema';
 import FAQSchema from '@/components/seo/FAQSchema';
 
+import { notFound } from 'next/navigation';
+
 // Define standard metadata for SEO
 export async function generateMetadata({ params }: { params: { city: string } }): Promise<Metadata> {
-  const city = params.city.charAt(0).toUpperCase() + params.city.slice(1);
+  const cityParam = params?.city || '';
+  if (!cityParam) return { title: 'Best Packers and Movers | Sunita Cargo' };
+  
+  const city = cityParam.charAt(0).toUpperCase() + cityParam.slice(1);
   return {
     title: `Best Packers and Movers in ${city} | Sunita Cargo Packers Movers`,
     description: `Looking for reliable packers and movers in ${city}? Sunita Cargo offers safe, affordable home and office shifting, car transport, and warehousing in ${city}. Get a free quote!`,
     alternates: {
-      canonical: `https://sunitacargopackersmovers.com/packers-and-movers-${params.city}`,
+      canonical: `https://sunitacargopackersmovers.com/packers-and-movers-${cityParam}`,
     }
   };
 }
 
 export default function CityPage({ params }: { params: { city: string } }) {
-  const city = params.city.charAt(0).toUpperCase() + params.city.slice(1);
+  const cityParam = params?.city || '';
+  if (!cityParam) return notFound();
+  
+  const city = cityParam.charAt(0).toUpperCase() + cityParam.slice(1);
   
   return (
     <main className="pt-20">
