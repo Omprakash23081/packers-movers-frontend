@@ -1,5 +1,8 @@
-import React from 'react';
-import { Check } from 'lucide-react';
+'use client';
+import React, { useState, useEffect } from 'react';
+import { Check, Loader2, AlertCircle } from 'lucide-react';
+import { API_BASE_URL } from '@/lib/api-config';
+
 
 interface PricingTier {
   size: string;
@@ -9,32 +12,67 @@ interface PricingTier {
   popular?: boolean;
 }
 
-const defaultTiers: PricingTier[] = [
-  {
-    size: '1 BHK',
-    local: '₹4,500 – ₹8,000',
-    intercity: '₹14,000 – ₹22,000',
-    features: ['1 Mini Truck', '2 Professional Packers', 'Standard Packing', 'Insurance Help']
-  },
-  {
-    size: '2 BHK',
-    local: '₹8,000 – ₹15,000',
-    intercity: '₹22,000 – ₹35,000',
-    features: ['1 Large Truck', '3 Professional Packers', 'Multi-layer Packing', 'Dedicated Manager'],
-    popular: true
-  },
-  {
-    size: '3 BHK+',
-    local: '₹14,000 – ₹25,000',
-    intercity: '₹35,000 – ₹55,000+',
-    features: ['1 Container Truck', '4-5 Expert Packers', 'Premium Wooden Crates', 'Priority Transit']
-  }
-];
-
 export default function PricingGrid({ city = 'Nagpur' }: { city?: string }) {
+  const [tiers, setTiers] = useState<PricingTier[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    async function fetchPricing() {
+      setLoading(true);
+      setError(false);
+      try {
+        const res = await fetch(`${API_BASE_URL}/pricing/house`);
+        if (!res.ok) throw new Error('Failed to fetch');
+        const data = await res.json();
+        
+        if (data && data.tiers) {
+          const mappedTiers = data.tiers.map((t: any, index: number) => ({
+            size: t.type.replace(' Home', ''),
+            local: t.costs.upTo50km,
+            intercity: t.costs.upTo500km,
+            features: [
+              'Professional Packing',
+              'Safe Loading/Unloading',
+              'Experienced Team',
+              'Damage Protection'
+            ],
+            popular: index === 1 // Set 2BHK as default popular
+          })).slice(0, 3);
+          
+          setTiers(mappedTiers);
+        }
+      } catch (err) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPricing();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
+        <Loader2 className="w-12 h-12 text-primary animate-spin" />
+        <p className="text-sm font-bold text-white/40 uppercase tracking-widest">Fetching Live Pricing...</p>
+      </div>
+    );
+  }
+
+  if (error || tiers.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[300px] p-8 text-center bg-white/5 rounded-[2.5rem] border border-dashed border-white/10">
+        <AlertCircle className="w-12 h-12 text-primary/40 mb-4" />
+        <h4 className="text-xl font-bold mb-2">Pricing Currently Unavailable</h4>
+        <p className="text-sm text-white/40 max-w-xs">Our dynamic pricing engine is being updated. Please get a custom quote for the most accurate rates.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {defaultTiers.map((tier) => (
+      {tiers.map((tier) => (
         <div 
           key={tier.size}
           className={`relative p-8 rounded-[2.5rem] border transition-all duration-500 hover:scale-[1.02] ${

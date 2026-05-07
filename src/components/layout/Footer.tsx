@@ -73,7 +73,7 @@ export default function Footer() {
               <li><Link href="/packers-and-movers-nagpur" className="hover:text-primary transition flex items-center gap-2 font-bold text-white"><ChevronRight size={14} className="text-primary" /> Packers & Movers Nagpur</Link></li>
               <li><Link href="/house-shifting-nagpur" className="hover:text-primary transition flex items-center gap-2"><ChevronRight size={14} className="text-primary" /> House Shifting</Link></li>
               <li><Link href="/office-relocation-nagpur" className="hover:text-primary transition flex items-center gap-2"><ChevronRight size={14} className="text-primary" /> Office Relocation</Link></li>
-              <li><Link href="/car-bike-transport-nagpur" className="hover:text-primary transition flex items-center gap-2"><ChevronRight size={14} className="text-primary" /> Vehicle Transport</Link></li>
+              <li><Link href="/car-transport-nagpur" className="hover:text-primary transition flex items-center gap-2"><ChevronRight size={14} className="text-primary" /> Vehicle Transport</Link></li>
               <li><Link href="/warehouse-storage-nagpur" className="hover:text-primary transition flex items-center gap-2"><ChevronRight size={14} className="text-primary" /> Warehouse Storage</Link></li>
             </ul>
           </div>

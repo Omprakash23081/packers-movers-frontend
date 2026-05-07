@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Search, Map, PackageCheck, Truck, Phone, ChevronRight, Clock, MapPin } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
+import { API_BASE_URL } from '@/lib/api-config';
 
 export default function TrackShipment() {
   return (
@@ -35,8 +36,7 @@ function TrackContent() {
     setShipment(null);
 
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api';
-      const res = await fetch(`${baseUrl}/shipments/track/${id.toUpperCase()}`);
+      const res = await fetch(`${API_BASE_URL}/shipments/track/${id.toUpperCase()}`);
       const data: any = await res.json();
 
       if (data.success) {

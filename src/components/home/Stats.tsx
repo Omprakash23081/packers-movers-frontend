@@ -46,9 +46,9 @@ export default function Stats() {
               transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
             >
               <TiltCard tiltMax={15} tiltSpeed={400} className="w-full h-full flex flex-col space-y-2 md:space-y-3 items-center justify-center p-4 md:p-6 rounded-2xl hover:bg-white/10 transition-colors border border-transparent hover:border-white/10 shadow-none hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
-                <div className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tighter text-white drop-shadow-md flex items-center">
+                <div className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter text-white drop-shadow-md flex items-baseline justify-center">
                   <Counter from={0} to={stat.value} />
-                  <span className="text-accent ml-1 text-2xl sm:text-3xl md:text-5xl">{stat.suffix}</span>
+                  <span className="text-accent ml-0.5 text-2xl sm:text-3xl md:text-5xl font-extrabold translate-y-[-0.1em]">{stat.suffix}</span>
                 </div>
                 <div className="text-[10px] sm:text-sm md:text-base font-bold text-white/80 uppercase tracking-widest mt-1 md:mt-2 px-2 md:px-4 text-center break-words">
                   {stat.label}

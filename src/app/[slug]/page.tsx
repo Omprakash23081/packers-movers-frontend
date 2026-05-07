@@ -20,6 +20,7 @@ import TestimonialCarousel from '@/components/home/TestimonialCarousel';
 const CostCalculator = dynamic(() => import('@/components/home/CostCalculator'));
 const GoogleReviews = dynamic(() => import('@/components/home/GoogleReviews'));
 const VisualProof = dynamic(() => import('@/components/home/VisualProof'));
+import SlugQuoteForm from '@/components/forms/SlugQuoteForm';
 
 // Data constants
 const cities = [
@@ -38,11 +39,9 @@ const cities = [
 ];
 
 const services = [
-  "home-shifting",
   "house-shifting",
   "office-relocation",
   "car-transport",
-  "car-bike-transport",
   "bike-transport",
   "warehouse-storage",
   "packers-and-movers"
@@ -415,25 +414,7 @@ export default function DynamicSEOPage({ params }: Props) {
                 </div>
                 <h3 className="font-black text-3xl mb-3 text-white">Save Up To 20%</h3>
                 <p className="text-sm text-secondary mb-8 leading-relaxed font-medium">Connect with an expert in {targetCity} and get a customized moving estimate in 5 minutes.</p>
-                <form className="space-y-6">
-                  <div className="space-y-2">
-                    <label className="text-[10px] uppercase font-black text-primary/70 tracking-widest pl-1">Full Name</label>
-                    <input type="text" className="w-full h-12 px-5 rounded-2xl border border-white/10 bg-white/5 outline-none focus:border-primary transition-all text-white font-medium" placeholder="Enter Full Name" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] uppercase font-black text-primary/70 tracking-widest pl-1">Mobile number</label>
-                    <input type="tel" className="w-full h-12 px-5 rounded-2xl border border-white/10 bg-white/5 outline-none focus:border-primary transition-all text-white font-medium" placeholder="Enter Mobile Number" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] uppercase font-black text-primary/70 tracking-widest pl-1">Moving To</label>
-                    <input type="text" className="w-full h-12 px-5 rounded-2xl border border-white/10 bg-white/5 outline-none focus:border-primary transition-all text-white font-medium" placeholder="Enter Destination City" />
-                  </div>
-                  <Button className="w-full h-14 text-lg font-black rounded-2xl mt-4 bg-primary text-white hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all">Get Instant Estimate</Button>
-                  <div className="flex items-center justify-center gap-4 mt-6 opacity-40">
-                    <ShieldCheck size={16}/>
-                    <span className="text-[10px] font-bold uppercase tracking-widest">Safe & Confidential</span>
-                  </div>
-                </form>
+                <SlugQuoteForm originCity={originCity} />
               </CardContent>
             </Card>
 

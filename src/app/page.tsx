@@ -16,6 +16,9 @@ const VideoTestimonials = dynamic(() => import('@/components/home/VideoTestimoni
 const PricingGuide = dynamic(() => import('@/components/home/PricingGuide'));
 const LocationGrid = dynamic(() => import('@/components/home/LocationGrid'));
 const CostCalculator = dynamic(() => import('@/components/home/CostCalculator'));
+const WhyChooseUs = dynamic(() => import('@/components/home/WhyChooseUs'));
+const ProcessFlow = dynamic(() => import('@/components/home/ProcessFlow'));
+
 
 export default function Home() {
   return (
@@ -30,7 +33,7 @@ export default function Home() {
             alt="Sunita Cargo Packers and Movers Background"
             fill
             sizes="100vw"
-            className="object-cover opacity-100 dark:opacity-80 pointer-events-none"
+            className="object-cover object-[70%_center] md:object-center opacity-100 dark:opacity-80 pointer-events-none transition-opacity duration-700"
             priority
             loading="eager"
             fetchPriority="high"
@@ -59,14 +62,16 @@ export default function Home() {
 
       <CostCalculator />
       <ServiceCards />
-      <ConnectWithUs />
+      <WhyChooseUs />
+      <ProcessFlow />
       <PricingGuide />
       <AboutUs />
-      <Gallery />
       <Stats />
       <GoogleReviews />
       <VideoTestimonials />
+      <Gallery />
       <VisualProof />
+      <ConnectWithUs />
       <ReviewsWidget />
       <LocationGrid />
       <FAQ />

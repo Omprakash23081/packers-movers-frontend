@@ -2,30 +2,38 @@
 import { motion } from 'framer-motion';
 import { Truck, Users, Warehouse, ShieldCheck } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const MOMENTS = [
   {
-    title: "Our Modern Fleet",
-    desc: "GPS-enabled enclosed containers for zero-damage transit.",
+    title: "Advanced Logistics Fleet",
+    desc: "Our GPS-enabled enclosed container trucks ensure 100% safety and real-time tracking for intercity vehicle and home relocation.",
     icon: <Truck size={24} />,
     color: "from-blue-500/20 to-transparent",
-    image: "/images/vehicle-transport.png"
+    image: "/images/vehicle-transport.png",
+    link: "/services/car-transport",
+    badge: "GPS Tracked"
   },
   {
-    title: "Expert Packing Team",
-    desc: "15+ years of experience in handling fragile and high-value assets.",
+    title: "Certified Packing Experts",
+    desc: "With 15+ years of ground-level experience, our team uses specialized 7-layer packing for fragile households and industrial machinery.",
     icon: <Users size={24} />,
     color: "from-primary/20 to-transparent",
-    image: "/images/house-shifting.png"
+    image: "/images/house-shifting.png",
+    link: "/services/house-shifting",
+    badge: "IBA Approved"
   },
   {
-    title: "Secure Warehousing",
-    desc: "CCTV-monitored, fire-proof storage for short and long term.",
+    title: "Secure 24/7 Warehousing",
+    desc: "Safe, fire-proof, and CCTV-monitored storage solutions in Nagpur for short-term and long-term household or business inventory.",
     icon: <Warehouse size={24} />,
     color: "from-emerald-500/20 to-transparent",
-    image: "/images/warehouse-storage.png"
+    image: "/images/warehouse-storage.png",
+    link: "/services/warehouse-storage",
+    badge: "CCTV Secured"
   }
 ];
+
 
 export default function VisualProof() {
   return (
@@ -51,8 +59,12 @@ export default function VisualProof() {
                whileInView={{ opacity: 1, scale: 1 }}
                viewport={{ once: true }}
                transition={{ delay: i * 0.1 }}
-               className="group relative h-[450px] rounded-[3rem] overflow-hidden border border-border bg-section"
+               className="group relative h-[450px] rounded-[3rem] overflow-hidden border border-border bg-section cursor-pointer"
              >
+                <Link href={item.link} className="absolute inset-0 z-20">
+                  <span className="sr-only">View {item.title}</span>
+                </Link>
+
                 {/* Background Image with Overlay */}
                 <div className="absolute inset-0 z-0">
                    <Image 
@@ -65,15 +77,25 @@ export default function VisualProof() {
                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
                 </div>
 
-                {/* Content */}
+                 {/* Content */}
                 <div className="absolute inset-0 z-10 p-10 flex flex-col justify-end">
+                   {item.badge && (
+                      <div className="mb-4 inline-block">
+                        <span className="px-3 py-1 rounded-md bg-white/10 backdrop-blur-md text-[10px] font-black text-white uppercase tracking-widest border border-white/20">
+                          {item.badge}
+                        </span>
+                      </div>
+                   )}
                    <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-500">
                       {item.icon}
                    </div>
                    <h3 className="text-2xl font-black text-white mb-3 tracking-tight">{item.title}</h3>
-                   <p className="text-white/60 font-medium leading-relaxed group-hover:text-white/90 transition-colors">
+                   <p className="text-white/60 font-medium leading-relaxed group-hover:text-white/90 transition-colors mb-6">
                       {item.desc}
                    </p>
+                   <div className="flex items-center gap-2 text-xs font-black text-white uppercase tracking-widest transition-all group-hover:text-primary">
+                      Explore Service <Truck size={14} className="text-primary group-hover:translate-x-1 transition-transform" />
+                   </div>
                 </div>
              </motion.div>
            ))}

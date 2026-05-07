@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import { CheckCircle, Loader2, ChevronDown } from 'lucide-react';
+import { API_BASE_URL } from '@/lib/api-config';
 
 interface FormData {
   firstName?: string;
@@ -38,7 +39,7 @@ export default function HeroForm() {
     };
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api'}/quotes`, {
+      const response = await fetch(`${API_BASE_URL}/quotes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submissionData),
@@ -52,7 +53,6 @@ export default function HeroForm() {
       }
     } catch (err) {
       alert("Failed to connect to server. Please check your internet or if the backend is running.");
-      console.error(err);
     } finally {
       setLoading(false);
     }

@@ -28,54 +28,60 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
   const title = params.slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
   return (
-    <div className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pb-20">
+      {/* Full-width Hero Image with Overlay Header */}
+      <div className="relative w-full h-[60vh] min-h-[500px] flex items-end mb-16">
+         <Image 
+           src="/images/hero-bg.png" 
+           alt={title} 
+           fill 
+           className="object-cover z-0"
+           priority
+         />
+         {/* Top gradient for navbar visibility, bottom gradient for text readability */}
+         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent z-10" />
+         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-transparent h-40 z-10" />
+         
+         <div className="container mx-auto px-4 sm:px-6 relative z-20 pb-12">
+            <div className="max-w-4xl mx-auto">
+               {/* Breadcrumbs */}
+               <nav className="flex items-center gap-2 text-[10px] font-bold text-white/50 uppercase tracking-widest mb-8">
+                 <Link href="/" className="hover:text-primary">Home</Link>
+                 <ChevronRight size={10} />
+                 <Link href="/blog" className="hover:text-primary">Resource Center</Link>
+                 <ChevronRight size={10} />
+                 <span className="text-white/80 truncate">{title}</span>
+               </nav>
+
+               <header className="space-y-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-primary text-[10px] font-black uppercase tracking-widest backdrop-blur-md">
+                    Relocation Strategy
+                  </div>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white max-w-4xl text-balance drop-shadow-lg">
+                    {title}
+                  </h1>
+                  
+                  <div className="flex flex-wrap items-center gap-6 pt-6 mt-6 border-t border-white/20 max-w-4xl">
+                     <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary backdrop-blur-md">
+                          <User size={14} />
+                        </div>
+                        <span className="text-xs font-bold text-white drop-shadow-md">By Sunita Cargo Editorial</span>
+                     </div>
+                     <div className="flex items-center gap-2 text-white/90 text-xs font-medium drop-shadow-md">
+                        <Calendar size={14} /> May 15, 2024
+                     </div>
+                     <div className="flex items-center gap-2 text-white/90 text-xs font-medium drop-shadow-md">
+                        <Clock size={14} /> 8 Min Read
+                     </div>
+                  </div>
+               </header>
+            </div>
+         </div>
+      </div>
+
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
-          {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-[10px] font-bold text-white/40 uppercase tracking-widest mb-8">
-            <Link href="/" className="hover:text-primary">Home</Link>
-            <ChevronRight size={10} />
-            <Link href="/blog" className="hover:text-primary">Resource Center</Link>
-            <ChevronRight size={10} />
-            <span className="text-white/60 truncate">{title}</span>
-          </nav>
-
-          {/* Post Header */}
-          <header className="space-y-6 mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-widest">
-              Relocation Strategy
-            </div>
-            <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-tight text-white">
-              {title}
-            </h1>
-            
-            <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-white/5">
-               <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-                    <User size={14} />
-                  </div>
-                  <span className="text-xs font-bold text-white/80">By Sunita Cargo Editorial</span>
-               </div>
-               <div className="flex items-center gap-2 text-white/40 text-xs">
-                  <Calendar size={14} /> May 15, 2024
-               </div>
-               <div className="flex items-center gap-2 text-white/40 text-xs">
-                  <Clock size={14} /> 8 Min Read
-               </div>
-            </div>
-          </header>
-
-          {/* Featured Image */}
-          <div className="relative h-[300px] md:h-[500px] rounded-[3rem] overflow-hidden mb-16 border border-white/10 shadow-2xl">
-             <Image 
-               src="/images/hero-bg.png" 
-               alt={title} 
-               fill 
-               className="object-cover"
-             />
-             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-          </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             {/* Content Body */}
             <div className="lg:col-span-8 prose prose-lg dark:prose-invert max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-primary prose-strong:text-white">

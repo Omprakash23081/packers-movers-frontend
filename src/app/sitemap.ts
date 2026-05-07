@@ -18,15 +18,12 @@ const cities = [
 ];
 
 const services = [
-  "home-shifting",
   "house-shifting",
   "office-relocation",
   "car-transport",
-  "car-bike-transport",
   "bike-transport",
   "warehouse-storage",
-  "packers-and-movers",
-  "packers-movers" // Added alias for indexing consistency
+  "packers-and-movers"
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -35,15 +32,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contact',
     '/track',
     '/about',
-    '/faq',
     '/blog',
     '/feedback',
     '/privacy',
     '/terms',
     '/packers-and-movers-nagpur',
+    '/services/bike-transport',
+    '/services/car-transport',
+    '/services/house-shifting',
+    '/services/office-relocation',
+    '/projects/premium-villa-shifting-nagpur',
+    '/projects/corporate-it-office-relocation',
+    '/projects/luxury-car-transport-nagpur-pune',
+    '/projects/industrial-machinery-storage',
+    '/blog/moving-charges-india-2024',
+    '/blog/pack-electronics-for-moving',
+    '/blog/iba-approved-packers-movers',
+    '/blog/relocation-checklist-30-days',
+    '/blog/nagpur-to-pune-shifting-guide'
   ];
 
-  // 1. Service + City pages (126 pages)
+  // 1. Service + City pages (492 pages)
   const serviceCityRoutes: string[] = [];
   services.forEach(service => {
     cities.forEach(city => {
@@ -55,7 +64,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const cityToCityRoutes: string[] = [];
   cities.forEach(from => {
     // Generate top routes from each city (limiting to first 5 for each to keep sitemap manageable but impactful)
-    // In a real scenario, you could list all 400+
     const targets = cities.filter(c => c !== from).slice(0, 5); 
     targets.forEach(to => {
       cityToCityRoutes.push(`/${from}-to-${to}-packers-movers`);

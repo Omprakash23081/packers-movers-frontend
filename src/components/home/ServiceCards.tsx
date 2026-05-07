@@ -28,7 +28,7 @@ const services = [
     title: 'Car & Bike Transport',
     description: 'Safe and insured vehicle transit across India. We provide IBA-approved enclosed carrier transport with real-time GPS tracking and 100% safety guarantee.',
     icon: Truck,
-    href: '/car-bike-transport-nagpur',
+    href: '/car-transport-nagpur',
     color: 'text-accent',
     bg: 'bg-accent/10',
     imageUrl: '/images/vehicle-transport.png'

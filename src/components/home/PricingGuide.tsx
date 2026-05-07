@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Truck, Home, IndianRupee, Building2, Car, Loader2 } from 'lucide-react';
+import { API_BASE_URL } from '@/lib/api-config';
 
 const services = [
   { id: 'house', label: 'House Shifting', icon: <Home size={18} /> },
@@ -28,8 +29,6 @@ interface IPricingTier {
   };
 }
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api';
-
 export default function PricingGuide() {
   const [activeTab, setActiveTab] = useState('house');
   const [pricingData, setPricingData] = useState<Record<string, IPricingTier[]> | null>(null);
@@ -46,7 +45,7 @@ export default function PricingGuide() {
         });
         setPricingData(formattedData);
       } catch (error) {
-        console.error('Failed to fetch pricing:', error);
+        // Handle error silently or show a UI notification
       } finally {
         setLoading(false);
       }

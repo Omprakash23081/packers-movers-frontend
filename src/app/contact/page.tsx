@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { MapPin, Phone, Mail, Loader2, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { API_BASE_URL } from '@/lib/api-config';
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ export default function ContactUs() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api'}/quotes`, {
+      const response = await fetch(`${API_BASE_URL}/quotes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +44,6 @@ export default function ContactUs() {
         alert(`Error: ${errorData.message || 'Something went wrong. Please try again.'}`);
       }
     } catch (error) {
-      console.error('Submission error:', error);
       alert('Failed to connect to the server. Please check if the backend is running.');
     } finally {
       setLoading(false);

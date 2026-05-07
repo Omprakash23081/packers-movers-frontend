@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
+import { API_BASE_URL } from '@/lib/api-config';
 
 const CATEGORIES = [
   { id: 'house', label: 'House Shifting', icon: <Home size={18} /> },
@@ -48,7 +49,6 @@ interface IPricingTier {
   };
 }
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api';
 
 export default function CostCalculator() {
   const [activeCategory, setActiveCategory] = useState('house');
@@ -71,7 +71,7 @@ export default function CostCalculator() {
         });
         setPricingData(formattedData);
       } catch (error) {
-        console.error('Failed to fetch pricing for calculator:', error);
+        // Handle silently
       }
     };
     fetchPricing();
@@ -83,17 +83,142 @@ export default function CostCalculator() {
     setResult(null);
   }, [activeCategory]);
 
-  // Pseudo-distance calculator based on city name hashes for demo purposes
+  // Coordinates for supported cities (Lat, Lng)
+  const CITY_COORDS: Record<string, [number, number]> = {
+    "Nagpur": [21.1458, 79.0882],
+    "Mumbai": [19.0760, 72.8777],
+    "Pune": [18.5204, 73.8567],
+    "Delhi": [28.6139, 77.2090],
+    "Bangalore": [12.9716, 77.5946],
+    "Hyderabad": [17.3850, 78.4867],
+    "Chennai": [13.0827, 80.2707],
+    "Kolkata": [22.5726, 88.3639],
+    "Ahmedabad": [23.0225, 72.5714],
+    "Surat": [21.1702, 72.8311],
+    "Jaipur": [26.9124, 75.7873],
+    "Lucknow": [26.8467, 80.9462],
+    "Kanpur": [26.4499, 80.3319],
+    "Indore": [22.7196, 75.8577],
+    "Thane": [19.2183, 72.9781],
+    "Bhopal": [23.2599, 77.4126],
+    "Visakhapatnam": [17.6868, 83.2185],
+    "Pimpri-Chinchwad": [18.6298, 73.7997],
+    "Patna": [25.5941, 85.1376],
+    "Vadodara": [22.3072, 73.1812],
+    "Ghaziabad": [28.6692, 77.4538],
+    "Ludhiana": [30.9010, 75.8573],
+    "Agra": [27.1767, 78.0081],
+    "Nashik": [19.9975, 73.7898],
+    "Faridabad": [28.4089, 77.3178],
+    "Meerut": [28.9845, 77.7064],
+    "Rajkot": [22.3039, 70.8022],
+    "Kalyan-Dombivli": [19.2403, 73.1305],
+    "Vasai-Virar": [19.3919, 72.8397],
+    "Varanasi": [25.3176, 82.9739],
+    "Srinagar": [34.0837, 74.7973],
+    "Aurangabad": [19.8762, 75.3433],
+    "Dhanbad": [23.7957, 86.4304],
+    "Amritsar": [31.6340, 74.8723],
+    "Navi Mumbai": [19.0330, 73.0297],
+    "Allahabad": [25.4358, 81.8463],
+    "Ranchi": [23.3441, 85.3096],
+    "Howrah": [22.5851, 88.3307],
+    "Coimbatore": [11.0168, 76.9558],
+    "Jabalpur": [23.1815, 79.9864],
+    "Gwalior": [26.2124, 78.1772],
+    "Vijayawada": [16.5062, 80.6480],
+    "Jodhpur": [26.2389, 73.0243],
+    "Madurai": [9.9252, 78.1198],
+    "Raipur": [21.2514, 81.6296],
+    "Kota": [25.2138, 75.8648],
+    "Chandigarh": [30.7333, 76.7794],
+    "Guwahati": [26.1445, 91.7362],
+    "Solapur": [17.6599, 75.9064],
+    "Hubli-Dharwad": [15.3647, 75.1240],
+    "Mysore": [12.2958, 76.6394],
+    "Tiruchirappalli": [10.7905, 78.7047],
+    "Bareilly": [28.3670, 79.4304],
+    "Aligarh": [27.8974, 78.0880],
+    "Tiruppur": [11.1085, 77.3411],
+    "Gurgaon": [28.4595, 77.0266],
+    "Moradabad": [28.8385, 78.7733],
+    "Jalandhar": [31.3260, 75.5762],
+    "Bhubaneswar": [20.2961, 85.8245],
+    "Salem": [11.6643, 78.1460],
+    "Warangal": [17.9689, 79.5941],
+    "Guntur": [16.3067, 80.4365],
+    "Bhiwandi": [19.2813, 73.0483],
+    "Saharanpur": [29.9640, 77.5460],
+    "Gorakhpur": [26.7606, 83.3731],
+    "Bikaner": [28.0229, 73.3119],
+    "Amravati": [20.9320, 77.7523],
+    "Noida": [28.5355, 77.3910],
+    "Jamshedpur": [22.8046, 86.2029],
+    "Bhilai": [21.1938, 81.3509],
+    "Cuttack": [20.4625, 85.8830],
+    "Firozabad": [27.1500, 78.4000],
+    "Kochi": [9.9312, 76.2673],
+    "Bhavnagar": [21.7645, 72.1519],
+    "Dehradun": [30.3165, 78.0322],
+    "Durgapur": [23.4807, 87.3204],
+    "Asansol": [23.6739, 86.9524],
+    "Nanded": [19.1383, 77.3210],
+    "Kolhapur": [16.7050, 74.2433],
+    "Ajmer": [26.4499, 74.6399],
+    "Gulbarga": [17.3297, 76.8343],
+    "Jamnagar": [22.4707, 70.0577],
+    "Ujjain": [23.1760, 75.7885],
+    "Loni": [28.7500, 77.2833],
+    "Siliguri": [26.7271, 88.3953],
+    "Jhansi": [25.4484, 78.5685],
+    "Ulhasnagar": [19.2215, 73.1645],
+    "Nellore": [14.4426, 79.9865],
+    "Jammu": [32.7266, 74.8570],
+    "Belgaum": [15.8497, 74.4977],
+    "Mangalore": [12.9141, 74.8560],
+    "Ambattur": [13.1143, 80.1482],
+    "Tirunelveli": [8.7139, 77.7567],
+    "Malegaon": [20.5500, 74.5333],
+    "Gaya": [24.7914, 85.0002],
+    "Jalgaon": [21.0076, 75.5626],
+    "Udaipur": [24.5854, 73.7125],
+    "Maheshtala": [22.5033, 88.2325],
+    "Goa": [15.2993, 74.1240],
+    "Greater Noida": [28.4744, 77.5040],
+    "Pondicherry": [11.9416, 79.8083],
+    "Haridwar": [29.9457, 78.1642],
+  };
+
   const calculateDistance = (city1: string, city2: string) => {
-    if (city1 === city2) return 20; // local
-    const str = city1 + city2;
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-        hash = ((hash << 5) - hash) + str.charCodeAt(i);
-        hash |= 0;
+    if (city1 === city2) return 20; // local shifting distance
+    
+    const coord1 = CITY_COORDS[city1];
+    const coord2 = CITY_COORDS[city2];
+    
+    if (!coord1 || !coord2) {
+      // Fallback if city not in coords list - use a default based on hash
+      const str = city1 + city2;
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+          hash = ((hash << 5) - hash) + str.charCodeAt(i);
+          hash |= 0;
+      }
+      return (Math.abs(hash) % 1500) + 100;
     }
-    const absHash = Math.abs(hash);
-    return (absHash % 2450) + 50; // Random distance between 50 and 2500
+
+    // Haversine formula to calculate real distance
+    const R = 6371; // Earth's radius in km
+    const dLat = (coord2[0] - coord1[0]) * Math.PI / 180;
+    const dLon = (coord2[1] - coord1[1]) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(coord1[0] * Math.PI / 180) * Math.cos(coord2[0] * Math.PI / 180) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const dist = R * c;
+    
+    // Add 15% for road travel overhead (since birds fly straight, trucks don't)
+    return Math.round(dist * 1.15);
   };
 
   const handleCalculate = () => {

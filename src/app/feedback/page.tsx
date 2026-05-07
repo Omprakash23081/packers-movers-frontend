@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Star, Send, ShieldCheck, HeartHandshake, Loader2, Quote } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { API_BASE_URL } from '@/lib/api-config';
 
 interface Feedback {
   _id: string;
@@ -38,7 +39,29 @@ export default function FeedbackPage() {
       rating: 5,
       message: 'Excellent bike transport service. My Royal Enfield reached Delhi in 5 days without a single scratch. The GPS tracking was very helpful.',
       createdAt: new Date(Date.now() - 172800000).toISOString()
+    },
+    {
+      _id: 'v4',
+      fullName: 'Suresh Menon',
+      rating: 5,
+      message: 'Professional office relocation service. They shifted our IT equipment with extreme care over the weekend. We were up and running by Monday morning.',
+      createdAt: new Date(Date.now() - 259200000).toISOString()
+    },
+    {
+      _id: 'v5',
+      fullName: 'Priya Sharma',
+      rating: 5,
+      message: 'Used their warehouse storage for 3 months while my new house was being ready. Very clean and secure facility. My goods were returned in perfect condition.',
+      createdAt: new Date(Date.now() - 345600000).toISOString()
+    },
+    {
+      _id: 'v6',
+      fullName: 'Amitabh Gupta',
+      rating: 5,
+      message: 'Nagpur to Bangalore move was flawless. The packing quality was superior to any other movers I have used before. Transparent pricing and no hidden costs.',
+      createdAt: new Date(Date.now() - 432000000).toISOString()
     }
+
   ]);
   const [loadingFeedbacks, setLoadingFeedbacks] = useState(true);
 
@@ -52,13 +75,11 @@ export default function FeedbackPage() {
   const fetchFeedbacks = async () => {
     setLoadingFeedbacks(true);
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api';
-      const res = await fetch(`${apiUrl}/feedback`);
+      const res = await fetch(`${API_BASE_URL}/feedback`);
       
       const contentType = res.headers.get("content-type");
       if (!res.ok) {
         if (res.status === 404) {
-          console.warn("Feedback endpoint not found on server yet.");
           return;
         }
         throw new Error(`Server returned ${res.status}`);
@@ -76,7 +97,6 @@ export default function FeedbackPage() {
         });
       }
     } catch (error) {
-      console.error('Error fetching feedbacks:', error);
     } finally {
       setLoadingFeedbacks(false);
     }
@@ -95,8 +115,7 @@ export default function FeedbackPage() {
 
     setLoading(true);
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://pakers-movers-backend.onrender.com/api';
-      const response = await fetch(`${apiUrl}/feedback`, {
+      const response = await fetch(`${API_BASE_URL}/feedback`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -129,7 +148,6 @@ export default function FeedbackPage() {
         }
       }
     } catch (error) {
-      console.error('Submission error:', error);
       alert('Network Error: Failed to connect to the feedback service. Please check your internet connection or try again later.');
     } finally {
       setLoading(false);

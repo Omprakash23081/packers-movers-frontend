@@ -125,7 +125,7 @@ export default function VideoTestimonials() {
       </div>
 
       <div className="mt-16 text-center">
-        <Link href="/contact">
+        <Link href="/feedback">
           <button className="bg-red-600 text-white font-black uppercase tracking-widest text-sm px-10 py-4 rounded-full hover:bg-red-700 transition-all shadow-xl hover:-translate-y-1 hover:shadow-red-600/30 flex items-center gap-2 mx-auto">
             Read more <ArrowRight size={16} />
           </button>
