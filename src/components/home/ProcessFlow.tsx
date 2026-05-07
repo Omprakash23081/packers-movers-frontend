@@ -87,7 +87,7 @@ export default function ProcessFlow() {
         {/* Localized Content for SEO */}
         <div className="mt-20 text-center max-w-3xl mx-auto">
           <p className="text-sm text-white/40 italic font-medium leading-relaxed">
-            Proudly serving Nagpur residents in Wadi, Hingna, Jaripatka, Manish Nagar, Somalwada, and Besa. Our local shifting expertise ensures that your neighborhood move is just as professional as a cross-country relocation.
+            Proudly serving major cities including Delhi NCR, Noida, Gurgaon, Pune, Bangalore, and Nagpur. Our nationwide network ensures that whether you're moving across the street or across the country, you get the same premium, 100% damage-free experience.
           </p>
         </div>
 

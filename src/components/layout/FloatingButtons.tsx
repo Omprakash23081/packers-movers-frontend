@@ -47,46 +47,58 @@ export default function FloatingButtons() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 50 }}
           transition={{ duration: 0.3 }}
-          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col gap-2 sm:gap-3"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 md:flex flex-col gap-2 sm:gap-3 w-full md:w-auto left-0 md:left-auto"
         >
-          {/* Tooltip */}
-          <AnimatePresence>
-            {showTooltip && (
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                className="absolute right-[4.5rem] bottom-14 bg-white dark:bg-black p-3 rounded-2xl shadow-xl shadow-black/10 border border-border/50 text-sm font-bold whitespace-nowrap hidden md:block"
-              >
-                Need help? Chat with us! 👋
-                <button 
-                  onClick={() => setShowTooltip(false)}
-                  className="absolute -top-2 -right-2 bg-muted rounded-full p-0.5"
+          {/* Desktop Layout */}
+          <div className="hidden md:flex flex-col gap-3">
+            {/* Tooltip */}
+            <AnimatePresence>
+              {showTooltip && (
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  className="absolute right-[4.5rem] bottom-14 bg-white dark:bg-black p-3 rounded-2xl shadow-xl shadow-black/10 border border-border/50 text-sm font-bold whitespace-nowrap"
                 >
-                  <X size={12} />
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                  Need help? Chat with us! 👋
+                  <button 
+                    onClick={() => setShowTooltip(false)}
+                    className="absolute -top-2 -right-2 bg-muted rounded-full p-0.5"
+                  >
+                    <X size={12} />
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-          <a
-            href="https://wa.me/917387661300"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-12 h-12 sm:w-14 sm:h-14 bg-[#25D366] hover:bg-[#1ebd5b] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-green-500/30 transition-all hover:-translate-y-1"
-            aria-label="Chat on WhatsApp"
-          >
-            <WhatsAppIcon className="w-[24px] h-[24px] sm:w-[28px] sm:h-[28px]" />
-          </a>
+            <a
+              href="https://wa.me/917387661300"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-14 h-14 bg-[#25D366] hover:bg-[#1ebd5b] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-green-500/30 transition-all hover:-translate-y-1"
+              aria-label="Chat on WhatsApp"
+            >
+              <WhatsAppIcon className="w-[28px] h-[28px]" />
+            </a>
 
-          {/* Call Button */}
-          <a
-            href="tel:+917387661300"
-            className="w-12 h-12 sm:w-14 sm:h-14 bg-primary hover:bg-primary/90 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-primary/30 transition-all hover:-translate-y-1"
-            aria-label="Call Us directly"
-          >
-            <Phone fill="currentColor" className="w-[20px] h-[20px] sm:w-[24px] sm:h-[24px]" />
-          </a>
+            <a
+              href="tel:+917387661300"
+              className="w-14 h-14 bg-primary hover:bg-primary/90 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-primary/30 transition-all hover:-translate-y-1"
+              aria-label="Call Us directly"
+            >
+              <Phone fill="currentColor" className="w-[24px] h-[24px]" />
+            </a>
+          </div>
+
+          {/* Mobile Sticky Bottom Bar */}
+          <div className="md:hidden fixed bottom-0 left-0 w-full bg-background border-t border-border shadow-[0_-10px_20px_rgba(0,0,0,0.1)] z-50 p-3 flex gap-3">
+            <a href="tel:+917387661300" className="flex-1 bg-primary text-white flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm">
+              <Phone size={16} fill="currentColor" /> Call Now
+            </a>
+            <a href="https://wa.me/917387661300" target="_blank" rel="noopener noreferrer" className="flex-1 bg-[#25D366] text-white flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm">
+              <WhatsAppIcon className="w-4 h-4" /> WhatsApp
+            </a>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

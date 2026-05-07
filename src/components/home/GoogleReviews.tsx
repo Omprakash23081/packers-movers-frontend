@@ -9,14 +9,14 @@ const REVIEWS = [
     name: "Rajesh Sharma",
     date: "2 weeks ago",
     rating: 5,
-    text: "Excellent service by Sunita Cargo! They moved my entire 3BHK from Nagpur to Pune without a single scratch. The team was professional and handled fragile items with extra care. Highly recommended!",
+    text: "Excellent service by Sunita Cargo! They moved my entire 3BHK from Noida to Pune without a single scratch. The team was professional and handled fragile items with extra care. Highly recommended!",
     avatar: "https://i.pravatar.cc/150?u=rajesh"
   },
   {
     name: "Priya Deshmukh",
     date: "1 month ago",
     rating: 5,
-    text: "Truly professional packers and movers in Nagpur. Their rates are transparent, and there were no hidden charges. The packing quality was superior compared to Agarwal Packers I used earlier.",
+    text: "Truly professional packers and movers in Delhi NCR. Their rates are transparent, and there were no hidden charges. The packing quality was superior compared to Agarwal Packers I used earlier.",
     avatar: "https://i.pravatar.cc/150?u=priya"
   },
   {

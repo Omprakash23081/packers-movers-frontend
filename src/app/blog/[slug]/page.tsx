@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 
 import { Metadata } from 'next';
+import { blogContent } from '@/lib/blog-content';
 
 export async function generateStaticParams() {
   // These should match the slugs in your content calendar
@@ -11,8 +12,9 @@ export async function generateStaticParams() {
     { slug: 'moving-charges-india-2024' },
     { slug: 'pack-electronics-for-moving' },
     { slug: 'iba-approved-packers-movers' },
-    { slug: 'relocation-checklist-30-days' },
-    { slug: 'nagpur-to-pune-shifting-guide' }
+    { slug: 'avoid-movers-mistakes' },
+    { slug: 'nagpur-to-pune-relocation-guide' },
+    { slug: 'corporate-office-relocation-tips' }
   ];
 }
 
@@ -69,10 +71,10 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
                         <span className="text-xs font-bold text-white drop-shadow-md">By Sunita Cargo Editorial</span>
                      </div>
                      <div className="flex items-center gap-2 text-white/90 text-xs font-medium drop-shadow-md">
-                        <Calendar size={14} /> May 15, 2024
+                        <Calendar size={14} /> {blogContent[params.slug]?.date || 'May 15, 2024'}
                      </div>
                      <div className="flex items-center gap-2 text-white/90 text-xs font-medium drop-shadow-md">
-                        <Clock size={14} /> 8 Min Read
+                        <Clock size={14} /> {blogContent[params.slug]?.readTime || '8 Min Read'}
                      </div>
                   </div>
                </header>
@@ -85,28 +87,13 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             {/* Content Body */}
             <div className="lg:col-span-8 prose prose-lg dark:prose-invert max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-primary prose-strong:text-white">
-               <p className="lead text-xl text-white/70 font-medium">
-                 Relocating in 2024 is more than just packing boxes; it's about navigating a complex landscape of logistics, regulations, and market prices. In this comprehensive guide, we break down everything you need to know about <strong>{title}</strong>.
-               </p>
-
-               <h2>Why Strategy Matters</h2>
-               <p>
-                 According to recent industry data, over 40% of relocation stress comes from poor planning and non-transparent pricing. At Sunita Cargo, we've spent 15+ years refining the art of the perfect move.
-               </p>
-
-               <div className="bg-primary/5 border-l-4 border-primary p-8 rounded-r-3xl my-10 not-prose">
-                  <p className="text-lg text-white font-bold mb-2 italic">"A successful move is 90% preparation and 10% execution. Most people get this ratio backwards."</p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-primary">— Head of Operations, Sunita Cargo</p>
-               </div>
-
-               <h3>Key Takeaways:</h3>
-               <ul>
-                 <li>Always verify <strong>IBA Approval</strong> before booking.</li>
-                 <li>Use 5-layer scientific packing for all electronics.</li>
-                 <li>Get a verified quote with zero hidden charges.</li>
-               </ul>
-
-               <p>
+               {blogContent[params.slug] ? (
+                 <div dangerouslySetInnerHTML={{ __html: blogContent[params.slug].content }} />
+               ) : (
+                 <p className="lead text-xl text-white/70 font-medium">Article content not found.</p>
+               )}
+               
+               <p className="mt-10 pt-10 border-t border-white/10 text-white/70 italic">
                  We hope this guide helps you plan your next shift with confidence. For a more tailored estimate, use our instant cost calculator below.
                </p>
 

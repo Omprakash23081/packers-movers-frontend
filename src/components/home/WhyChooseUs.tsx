@@ -26,12 +26,14 @@ const BENEFITS = [
 ];
 
 const FEATURES = [
-  "No Hidden Costs - 100% Transparent Quotations",
-  "Dedicated Move Coordinator for every client",
-  "Specialized carriers for Car and Bike transport",
-  "24/7 Customer Support and live tracking",
-  "Skilled and verified professional workforce",
-  "Eco-friendly packing options available"
+  "Professional Packing Team",
+  "Affordable & Transparent Pricing",
+  "Damage-Free Transport",
+  "Live Shipment Tracking",
+  "Timely Delivery",
+  "24/7 Customer Support",
+  "100% Transit Insurance",
+  "Trained & Verified Staff"
 ];
 
 export default function WhyChooseUs() {
@@ -96,10 +98,10 @@ export default function WhyChooseUs() {
           <h3 className="text-2xl font-black mb-6 text-center">Comprehensive Relocation Solutions Across India</h3>
           <div className="columns-1 md:columns-2 gap-12 text-sm text-muted-foreground leading-relaxed font-medium">
             <p className="mb-4">
-              As the leading **Packers and Movers in Nagpur**, Sunita Cargo offers a wide range of services including house shifting, office relocation, and industrial moves. We specialize in **Nagpur to Pune packers and movers** routes, as well as long-distance transport to Delhi, Mumbai, Bangalore, and Hyderabad. Our team is trained in scientific packing methods, ensuring your furniture and electronics stay safe during thousands of kilometers of transit.
+              As the leading **Packers and Movers in NCR**, Sunita Cargo offers a wide range of services including house shifting, office relocation, and industrial moves. We dominate local shifting in **Noida, Greater Noida, Ghaziabad, and Delhi**, while providing dedicated long-distance transport to Mumbai, Pune, Bangalore, and Nagpur. Our team is trained in scientific packing methods, ensuring your furniture and electronics stay safe during thousands of kilometers of transit.
             </p>
             <p>
-              Our car and bike transport services use specialized enclosed carriers to prevent road damage and wear-and-tear. We are also known for our secure **warehouse and storage solutions**, providing short-term and long-term space for households and businesses in Nagpur. Whether you are looking for local shifting or domestic relocation, our transparent pricing and commitment to safety make us the preferred choice for thousands of satisfied customers every year.
+              Our car and bike transport services use specialized enclosed carriers with **Live GPS Tracking** to prevent road damage and wear-and-tear. We are also known for our secure **warehouse and storage solutions**, providing short-term and long-term space for households and businesses. Whether you are looking for local shifting or domestic relocation, our transparent pricing and commitment to safety make us the preferred choice for thousands of satisfied customers.
             </p>
           </div>
         </div>

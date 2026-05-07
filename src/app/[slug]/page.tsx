@@ -64,6 +64,19 @@ export async function generateStaticParams() {
     });
   });
 
+  // 1.5 Localities
+  const primaryCitiesWithLocalities = ['nagpur'];
+  services.forEach(service => {
+    primaryCitiesWithLocalities.forEach(city => {
+      const trait = getCityTrait(city);
+      if (trait.localities) {
+        trait.localities.forEach(locality => {
+          params.push({ slug: `${service}-in-${locality}-${city}` });
+        });
+      }
+    });
+  });
+
   // 2. City to City + Service
   // For static generation, we'll pick top routes to keep build time reasonable
   // In production, you can generate all 400+ if needed.
@@ -86,7 +99,8 @@ type Props = {
 
 type SlugData = 
   | { type: 'route', from: string, to: string, service: string }
-  | { type: 'service-city', service: string, city: string };
+  | { type: 'service-city', service: string, city: string }
+  | { type: 'locality', service: string, locality: string, city: string };
 
 function parseSlug(slug: string): SlugData | null {
   // Pattern 1: [from]-to-[to]-[service]
@@ -119,6 +133,23 @@ function parseSlug(slug: string): SlugData | null {
     }
   }
 
+  // Pattern 3: [service]-in-[locality]-[city]
+  const localityMatch = normalizedSlug.match(/^([a-z-]+)-in-([a-z-]+)-([a-z-]+)$/);
+  if (localityMatch) {
+    const service = localityMatch[1];
+    const locality = localityMatch[2];
+    const city = localityMatch[3];
+    
+    if (services.includes(service) && cities.includes(city)) {
+      return {
+        type: 'locality',
+        service,
+        locality,
+        city
+      };
+    }
+  }
+
   return null;
 }
 
@@ -144,6 +175,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         canonical: canonicalUrl,
       }
     };
+  } else if (data.type === 'locality') {
+    const localityName = getTitleCase(data.locality);
+    return {
+      title: `Best ${serviceName} in ${localityName}, ${cityName} | Sunita Cargo`,
+      description: `Verified ${serviceName.toLowerCase()} in ${localityName}, ${cityName}. Sunita Cargo provides fast, safe, and affordable shifting in ${localityName}.`,
+      alternates: {
+        canonical: canonicalUrl,
+      }
+    };
   } else {
     const fromCity = getTitleCase(data.from!);
     const toCity = getTitleCase(data.to!);
@@ -162,11 +202,15 @@ export default function DynamicSEOPage({ params }: Props) {
   if (!data) notFound();
 
   const isRoute = data.type === 'route';
+  const isLocality = data.type === 'locality';
   const mainTitle = data.type === 'route'
     ? `${getTitleCase(data.service)} from ${getTitleCase(data.from)} to ${getTitleCase(data.to)}`
-    : `${getTitleCase(data.service)} in ${getTitleCase(data.city)}`;
+    : data.type === 'locality'
+      ? `${getTitleCase(data.service)} in ${getTitleCase(data.locality)}, ${getTitleCase(data.city)}`
+      : `${getTitleCase(data.service)} in ${getTitleCase(data.city)}`;
   
   const targetCity = data.type === 'route' ? getTitleCase(data.to) : getTitleCase(data.city);
+  const targetLocality = data.type === 'locality' ? getTitleCase(data.locality) : null;
   const originCity = data.type === 'route' ? getTitleCase(data.from) : targetCity;
   const serviceName = getTitleCase(data.service);
 
@@ -190,7 +234,9 @@ export default function DynamicSEOPage({ params }: Props) {
           <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed animate-in fade-in duration-1000 delay-300 text-balance">
             {isRoute 
               ? `Planning a move from ${originCity} to ${targetCity}? Sunita Cargo Packers Movers provides the most secure and price-effective intercity ${serviceName.toLowerCase()} services with a 100% damage-free guarantee.`
-              : generateIntro(data.city!, data.service!)}
+              : isLocality
+                ? `Looking for trusted ${serviceName.toLowerCase()} in ${targetLocality}, ${targetCity}? Sunita Cargo offers fast, localized, and 100% safe relocation services right in your neighborhood.`
+                : generateIntro(data.city!, data.service!)}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 animate-in fade-in duration-1000 delay-500">
             <Button asChild size="lg" className="rounded-full shadow-apple h-14 px-8 text-lg font-bold cursor-pointer">
@@ -226,10 +272,10 @@ export default function DynamicSEOPage({ params }: Props) {
             {/* 1. In-Depth Introduction (SEO Boost) */}
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <h2 className="text-4xl font-extrabold tracking-tight text-foreground border-l-8 border-primary pl-6 mb-8">
-                Your Trusted Partner for {serviceName} in {targetCity}
+                Your Trusted Partner for {serviceName} in {isLocality ? `${targetLocality}, ${targetCity}` : targetCity}
               </h2>
               <p className="text-muted-foreground leading-extra-relaxed">
-                Relocating home or business can be one of life&apos;s most stressful events. At Sunita Cargo Packers Movers, we have spent over 15 years refining our process to make <strong>{serviceName.toLowerCase()} in {targetCity}</strong> as seamless and worry-free as possible. {data.type === 'service-city' && generateIntro(data.city, data.service)} Whether you are moving down the street or shifting {isRoute ? `from ${originCity} to ${targetCity}` : `across the country`}, our team is equipped with the skills and passion to deliver perfection.
+                Relocating home or business can be one of life&apos;s most stressful events. At Sunita Cargo Packers Movers, we have spent over 15 years refining our process to make <strong>{serviceName.toLowerCase()} in {isLocality ? `${targetLocality}, ` : ''}{targetCity}</strong> as seamless and worry-free as possible. {data.type === 'service-city' && generateIntro(data.city, data.service)} Whether you are moving down the street or shifting {isRoute ? `from ${originCity} to ${targetCity}` : `across the country`}, our team is equipped with the skills and passion to deliver perfection.
               </p>
               <p className="text-muted-foreground leading-extra-relaxed">
                 {data.type === 'route' 

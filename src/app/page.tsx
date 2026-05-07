@@ -4,6 +4,7 @@ import HeroForm from '../components/home/HeroForm';
 import HeroContent from '../components/home/HeroContent';
 
 const ServiceCards = dynamic(() => import('@/components/home/ServiceCards'));
+const TrackingBanner = dynamic(() => import('@/components/home/TrackingBanner'));
 const AboutUs = dynamic(() => import('@/components/home/AboutUs'));
 const Gallery = dynamic(() => import('@/components/home/Gallery'));
 const Stats = dynamic(() => import('@/components/home/Stats'));
@@ -61,6 +62,7 @@ export default function Home() {
       </div>
 
 
+      <TrackingBanner />
       <CostCalculator />
       <ServiceCards />
       <WhyChooseUs />
@@ -68,12 +70,12 @@ export default function Home() {
       <ConnectWithUs />
       <ProcessFlow />
       <AboutUs />
+      <VideoTestimonials />
       <GoogleReviews />
       <Stats />
       <Gallery />
       <VisualProof />
       <ReviewsWidget />
-      <VideoTestimonials />
       <LocationGrid />
       <FAQ />
 

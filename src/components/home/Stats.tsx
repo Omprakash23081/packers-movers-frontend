@@ -4,10 +4,10 @@ import { motion, useInView, useSpring, useTransform } from 'framer-motion';
 import { TiltCard } from '@/components/ui/TiltCard';
 
 const stats = [
-  { value: 12500, suffix: '+', label: 'Moves Completed' },
-  { value: 45, suffix: '+', label: 'Owned Containers' },
-  { value: 15, suffix: '+', label: 'Years in Nagpur' },
-  { value: 99, suffix: '%', label: 'Safe Delivery Rate' },
+  { value: 500, suffix: '+', label: 'Successful Moves' },
+  { value: 50, suffix: '+', label: 'Cities Covered' },
+  { value: 100, suffix: '+', label: 'Positive Reviews' },
+  { value: 24, suffix: '/7', label: 'Customer Support' },
 ];
 
 function Counter({ from, to }: { from: number; to: number }) {

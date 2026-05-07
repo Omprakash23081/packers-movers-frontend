@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Star, Send, ShieldCheck, HeartHandshake, Loader2, Quote } from 'lucide-react';
+import { Star, Send, ShieldCheck, HeartHandshake, Loader2, Quote, CheckCircle2 } from 'lucide-react';
+import NextImage from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { API_BASE_URL } from '@/lib/api-config';
 
@@ -10,6 +11,7 @@ interface Feedback {
   rating: number;
   message: string;
   createdAt: string;
+  avatar?: string;
 }
 
 export default function FeedbackPage() {
@@ -17,7 +19,7 @@ export default function FeedbackPage() {
   const [hoverRating, setHoverRating] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  
+
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([
     {
       _id: 'v1',
@@ -76,7 +78,7 @@ export default function FeedbackPage() {
     setLoadingFeedbacks(true);
     try {
       const res = await fetch(`${API_BASE_URL}/feedback`);
-      
+
       const contentType = res.headers.get("content-type");
       if (!res.ok) {
         if (res.status === 404) {
@@ -91,12 +93,15 @@ export default function FeedbackPage() {
 
       const data = await res.json();
       if (data.success && data.feedbacks) {
-        setFeedbacks(prev => {
-          const newFeedbacks = data.feedbacks.filter((df: any) => !prev.some(p => p._id === df._id));
-          return [...newFeedbacks, ...prev];
-        });
+        if (data.feedbacks.length > 0) {
+          setFeedbacks(prev => {
+            const newFeedbacks = data.feedbacks.filter((df: any) => !prev.some(p => p._id === df._id));
+            return [...newFeedbacks, ...prev];
+          });
+        }
       }
     } catch (error) {
+      console.error("Failed to fetch feedbacks:", error);
     } finally {
       setLoadingFeedbacks(false);
     }
@@ -128,10 +133,21 @@ export default function FeedbackPage() {
 
       const contentType = response.headers.get("content-type");
       if (response.ok) {
+        const data = await response.json().catch(() => null);
         setSubmitted(true);
         setFormData({ fullName: '', email: '', phone: '', message: '' });
         setRating(0);
-        fetchFeedbacks();
+
+        // Add the new feedback to the list immediately for better UX
+        if (data && data.success && data.feedback) {
+          setFeedbacks(prev => {
+            // Avoid duplicates if fetchFeedbacks also runs
+            if (prev.some(p => p._id === data.feedback._id)) return prev;
+            return [data.feedback, ...prev];
+          });
+        } else {
+          fetchFeedbacks();
+        }
       } else {
         // Handle non-JSON or missing error messages gracefully
         if (contentType && contentType.indexOf("application/json") !== -1) {
@@ -157,7 +173,7 @@ export default function FeedbackPage() {
   return (
     <main className="min-h-screen bg-background pt-32 pb-20 overflow-x-hidden">
       <div className="container mx-auto px-4 relative mobile-95-container">
-        
+
         {/* Header Section */}
         <div className="text-center mb-10 sm:mb-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-bold text-sm mb-6 border border-primary/20 backdrop-blur-md">
@@ -173,12 +189,12 @@ export default function FeedbackPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-20">
-          
+
           {/* Feedback Form */}
           <div className="lg:col-span-8">
             <div className="glass-panel p-5 sm:p-8 md:p-12 rounded-3xl sm:rounded-[2rem] border border-border shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2" />
-              
+
               {submitted ? (
                 <div className="text-center py-16 animate-in zoom-in duration-500">
                   <div className="w-20 h-20 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -188,9 +204,9 @@ export default function FeedbackPage() {
                   <p className="text-muted-foreground text-lg mb-8">
                     We truly appreciate you taking the time to share your experience with us.
                   </p>
-                  <Button 
+                  <Button
                     onClick={() => setSubmitted(false)}
-                    variant="outline" 
+                    variant="outline"
                     className="rounded-full px-8"
                   >
                     Submit Another Response
@@ -213,13 +229,12 @@ export default function FeedbackPage() {
                           onMouseLeave={() => setHoverRating(0)}
                           onClick={() => setRating(star)}
                         >
-                          <Star 
-                            size={48} 
-                            className={`transition-colors duration-300 ${
-                              (hoverRating || rating) >= star 
-                                ? 'fill-yellow-500 text-yellow-500 drop-shadow-[0_0_15px_rgba(234,179,8,0.4)]' 
-                                : 'text-muted-foreground/30 hover:text-muted-foreground/50'
-                            }`} 
+                          <Star
+                            size={48}
+                            className={`transition-colors duration-300 ${(hoverRating || rating) >= star
+                              ? 'fill-yellow-500 text-yellow-500 drop-shadow-[0_0_15px_rgba(234,179,8,0.4)]'
+                              : 'text-muted-foreground/30 hover:text-muted-foreground/50'
+                              }`}
                           />
                         </button>
                       ))}
@@ -229,21 +244,21 @@ export default function FeedbackPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-3">
                       <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Full Name</label>
-                      <input 
+                      <input
                         required
-                        type="text" 
+                        type="text"
                         value={formData.fullName}
-                        onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                         placeholder="Enter Full Name"
                         className="w-full h-14 px-6 rounded-2xl bg-background border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-medium"
                       />
                     </div>
                     <div className="space-y-3">
                       <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Email Address (Optional)</label>
-                      <input 
-                        type="email" 
+                      <input
+                        type="email"
                         value={formData.email}
-                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="Enter Email Address"
                         className="w-full h-14 px-6 rounded-2xl bg-background border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-medium"
                       />
@@ -252,11 +267,11 @@ export default function FeedbackPage() {
 
                   <div className="space-y-3">
                     <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Phone Number</label>
-                    <input 
+                    <input
                       required
-                      type="tel" 
+                      type="tel"
                       value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="Enter Phone Number"
                       className="w-full h-14 px-6 rounded-2xl bg-background border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-medium"
                     />
@@ -264,18 +279,18 @@ export default function FeedbackPage() {
 
                   <div className="space-y-3">
                     <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Your Feedback</label>
-                    <textarea 
+                    <textarea
                       required
                       value={formData.message}
-                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Enter Your Feedback"
                       className="w-full h-40 p-6 rounded-2xl bg-background border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-medium resize-none"
                     ></textarea>
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    size="lg" 
+                  <Button
+                    type="submit"
+                    size="lg"
                     disabled={loading}
                     className="w-full h-16 rounded-2xl text-lg font-bold shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all"
                   >
@@ -308,39 +323,67 @@ export default function FeedbackPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Customers Say</h2>
             <p className="text-muted-foreground">Real feedback from recent relocations</p>
           </div>
-          
+
           {loadingFeedbacks ? (
             <div className="flex justify-center items-center py-20">
               <Loader2 className="animate-spin text-primary" size={40} />
             </div>
           ) : feedbacks.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-0">
               {feedbacks.map((fb) => (
-                <div key={fb._id} className="bg-section p-8 rounded-3xl border border-border relative">
-                  <Quote className="absolute top-6 right-6 text-primary/10" size={40} />
-                  <div className="flex text-yellow-500 mb-6">
-                    {[1,2,3,4,5].map(i => (
-                      <Star key={i} size={16} fill={i <= fb.rating ? "currentColor" : "none"} className={i <= fb.rating ? "" : "text-muted-foreground/30"} />
-                    ))}
+                <div key={fb._id} className="w-[96%] mx-auto sm:w-full bg-[#0B1224] backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/5 relative overflow-hidden group shadow-2xl">
+                  {/* Google Logo */}
+                  <div className="absolute top-5 right-5 opacity-40">
+                    <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24">
+                      <path d="M12.48 10.92v3.28h7.84c-.24 1.84-2.16 5.4-7.84 5.4-4.8 0-8.72-3.96-8.72-8.6s3.92-8.6 8.72-8.6c2.8 0 4.64 1.16 5.68 2.16l2.6-2.6C19.12 1.28 16.08 0 12.48 0 5.6 0 0 5.6 0 12.48s5.6 12.48 12.48 12.48c7.2 0 11.92-5.04 11.92-12.16 0-.8-.08-1.44-.24-2.08h-11.68z" />
+                    </svg>
                   </div>
-                  <p className="text-sm text-muted-foreground font-medium italic mb-8 leading-relaxed">
-                    "{fb.message}"
-                  </p>
-                  <div className="flex items-center gap-4 border-t border-border/50 pt-6">
-                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary uppercase">
-                      {fb.fullName.substring(0, 2)}
+
+                  {/* Header: User Info */}
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-primary/20 shrink-0">
+                      <NextImage
+                        src={fb.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(fb.fullName)}&background=random`}
+                        alt={fb.fullName}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
                     <div>
-                      <p className="font-bold text-sm text-foreground">{fb.fullName}</p>
-                      <p className="text-xs text-muted-foreground">{new Date(fb.createdAt).toLocaleDateString()}</p>
+                      <div className="flex items-center gap-1.5">
+                        <h4 className="font-bold text-white text-base leading-none">{fb.fullName}</h4>
+                        <div className="w-3.5 h-3.5 bg-emerald-500 rounded-full flex items-center justify-center">
+                          <CheckCircle2 className="text-white w-2.5 h-2.5" />
+                        </div>
+                      </div>
+                      <p className="text-[10px] text-white/40 uppercase tracking-widest mt-1 font-bold">
+                        {new Date(fb.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </p>
                     </div>
+                  </div>
+
+                  {/* Rating Stars */}
+                  <div className="flex gap-0.5 text-yellow-500 mb-4">
+                    {[1, 2, 3, 4, 5].map(i => (
+                      <Star key={i} size={14} fill={i <= fb.rating ? "currentColor" : "none"} className={i <= fb.rating ? "drop-shadow-[0_0_8px_rgba(234,179,8,0.3)]" : "text-white/10"} />
+                    ))}
+                  </div>
+
+                  {/* Feedback Text */}
+                  <p className="text-white/70 text-sm leading-relaxed mb-6 font-medium italic line-clamp-4">
+                    &quot;{fb.message}&quot;
+                  </p>
+
+                  {/* Verified Badge */}
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[10px] font-black uppercase tracking-widest">
+                    Verified Customer
                   </div>
                 </div>
               ))}
             </div>
           ) : (
             <div className="text-center py-12 bg-section/30 rounded-3xl border border-border border-dashed">
-              <p className="text-muted-foreground">No feedback yet. Be the first to share your experience!</p>
+              <p className="text-muted-foreground">No feedback found. Be the first to share your experience!</p>
             </div>
           )}
         </div>

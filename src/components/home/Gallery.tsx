@@ -9,13 +9,13 @@ import { projects } from '@/lib/projects';
 export default function Gallery() {
   // Use the detailed project data for the gallery
   const galleryItems = [
-    { ...projects[0], height: 'h-[400px]', delay: 0 },
-    { ...projects[1], height: 'h-[300px]', delay: 0.1 },
-    { ...projects[2], height: 'h-[500px]', delay: 0.2 },
+    { ...projects[0], height: 'h-[350px]', delay: 0 },
+    { ...projects[1], height: 'h-[350px]', delay: 0.1 },
+    { ...projects[2], height: 'h-[350px]', delay: 0.2 },
     { ...projects[3], height: 'h-[350px]', delay: 0.3 },
     // Repeat some items for a fuller grid, using different slugs
-    { ...projects[0], slug: 'villa-shifting-repeat', height: 'h-[450px]', delay: 0.4 },
-    { ...projects[1], slug: 'office-shifting-repeat', height: 'h-[300px]', delay: 0.5 }
+    { ...projects[0], slug: 'villa-shifting-repeat', height: 'h-[350px]', delay: 0.4 },
+    { ...projects[1], slug: 'office-shifting-repeat', height: 'h-[350px]', delay: 0.5 }
   ];
 
   return (
@@ -50,8 +50,8 @@ export default function Gallery() {
           </motion.p>
         </div>
 
-        {/* Masonry Grid via CSS Columns */}
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+        {/* Uniform Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-0">
           {galleryItems.map((item, index) => (
             <motion.div
               key={index}
@@ -59,10 +59,10 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: item.delay, duration: 0.6, ease: "easeOut" }}
-              className={`relative w-full ${item.height} break-inside-avoid`}
+              className={`relative w-full ${item.height}`}
             >
               <Link href={`/projects/${item.slug}`} className="block w-full h-full">
-                <TiltCard tiltMax={15} className="w-full h-full rounded-none sm:rounded-3xl overflow-hidden shadow-xl group cursor-pointer">
+                <TiltCard tiltMax={10} className="w-full h-full rounded-[2.5rem] overflow-hidden shadow-2xl group cursor-pointer border border-white/5 bg-[#0A0F1E]">
                   <Image
                     src={item.mainImage}
                     alt={item.title}
@@ -71,16 +71,21 @@ export default function Gallery() {
                     className="object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
 
-                  {/* Premium Glass Hover Overlay */}
-                  <div className="absolute inset-0 bg-primary/40 dark:bg-primary/60 mix-blend-multiply opacity-100 transition-opacity duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-                    <div className="transform translate-y-0 transition-all duration-500 flex flex-col items-center p-6 text-center">
-                      <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white mb-3 shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+                  {/* Dark Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1E] via-[#0A0F1E]/20 to-transparent opacity-90 transition-opacity duration-500" />
+
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                      <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white mb-4 border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                         <ZoomIn size={24} />
                       </div>
-                      <h3 className="text-white font-bold text-xl mb-1">{item.title}</h3>
-                      <span className="text-white/80 font-medium text-sm mb-4">{item.category}</span>
-                      <span className="bg-white text-primary font-bold text-sm px-5 py-2 rounded-full shadow-lg">View Project</span>
+                      <h3 className="text-white font-black text-2xl mb-1 tracking-tight">{item.title}</h3>
+                      <div className="flex items-center gap-2">
+                        <span className="text-primary font-black text-xs uppercase tracking-widest">{item.category}</span>
+                        <div className="w-1 h-1 rounded-full bg-white/20" />
+                        <span className="text-white/40 font-bold text-xs uppercase tracking-widest">View Project</span>
+                      </div>
                     </div>
                   </div>
                 </TiltCard>

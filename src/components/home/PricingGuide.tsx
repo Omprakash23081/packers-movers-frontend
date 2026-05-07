@@ -66,7 +66,7 @@ export default function PricingGuide() {
 
   return (
     <section className="py-24 bg-muted/20 relative overflow-hidden">
-      <div className="container mx-auto px-0 md:px-6 relative z-10 w-full">
+      <div className="w-full px-0 md:px-6 relative z-10">
         {/* Header Section */}
         <div className="flex flex-col items-center mb-16 text-center space-y-6">
           <motion.div
