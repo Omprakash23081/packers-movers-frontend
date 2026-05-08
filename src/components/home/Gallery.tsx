@@ -13,13 +13,12 @@ export default function Gallery() {
     { ...projects[1], height: 'h-[350px]', delay: 0.1 },
     { ...projects[2], height: 'h-[350px]', delay: 0.2 },
     { ...projects[3], height: 'h-[350px]', delay: 0.3 },
-    // Repeat some items for a fuller grid, using different slugs
-    { ...projects[0], slug: 'villa-shifting-repeat', height: 'h-[350px]', delay: 0.4 },
-    { ...projects[1], slug: 'office-shifting-repeat', height: 'h-[350px]', delay: 0.5 }
+    { ...projects[4], height: 'h-[350px]', delay: 0.4 },
+    { ...projects[5], height: 'h-[350px]', delay: 0.5 }
   ];
 
   return (
-    <section className="py-24 bg-muted/20 relative">
+    <section id="gallery" className="py-12 md:py-20 bg-muted/20 relative">
       <div className="w-full px-0 sm:px-4 md:px-6">
         <div className="text-center mb-16 space-y-4">
           <motion.div
@@ -55,10 +54,10 @@ export default function Gallery() {
           {galleryItems.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: item.delay, duration: 0.6, ease: "easeOut" }}
+              transition={{ delay: item.delay, duration: 0.3, ease: "easeOut" }}
               className={`relative w-full ${item.height}`}
             >
               <Link href={`/projects/${item.slug}`} className="block w-full h-full">

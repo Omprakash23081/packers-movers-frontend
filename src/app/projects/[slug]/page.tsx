@@ -57,12 +57,6 @@ export default function ProjectDetailPage() {
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-col space-y-4"
           >
-            <button 
-              onClick={() => router.back()}
-              className="flex items-center gap-2 text-white/80 hover:text-white font-bold transition-all w-fit mb-6 bg-white/10 hover:bg-white/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/10"
-            >
-              <ArrowLeft size={18} /> Back to Gallery
-            </button>
             <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-sm font-bold text-primary w-fit backdrop-blur-md">
               {project.category}
             </div>
@@ -101,6 +95,37 @@ export default function ProjectDetailPage() {
               </div>
             </motion.section>
 
+            {/* Challenges & Solutions */}
+            {project.challenges && project.challenges.length > 0 && (
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="space-y-8 p-8 md:p-10 rounded-[2.5rem] bg-primary/5 border border-primary/10 relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -mr-16 -mt-16" />
+                <h2 className="text-3xl font-bold">Challenges & Solutions</h2>
+                <div className="space-y-6">
+                  {project.challenges.map((item, i) => (
+                    <div key={i} className="grid md:grid-cols-2 gap-8">
+                      <div className="space-y-2">
+                         <div className="text-xs font-black text-rose-500 uppercase tracking-widest flex items-center gap-2">
+                           <div className="w-2 h-2 rounded-full bg-rose-500" /> The Challenge
+                         </div>
+                         <p className="text-lg font-bold">{item.challenge}</p>
+                      </div>
+                      <div className="space-y-2">
+                         <div className="text-xs font-black text-emerald-500 uppercase tracking-widest flex items-center gap-2">
+                           <div className="w-2 h-2 rounded-full bg-emerald-500" /> Our Solution
+                         </div>
+                         <p className="text-muted-foreground font-medium">{item.solution}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.section>
+            )}
+
             {/* Steps / Process */}
             <motion.section 
               initial={{ opacity: 0, y: 20 }}
@@ -128,6 +153,35 @@ export default function ProjectDetailPage() {
                 ))}
               </div>
             </motion.section>
+
+            {/* Testimonial */}
+            {project.testimonial && (
+              <motion.section
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="relative p-8 md:p-12 rounded-[3rem] bg-[#0A0F1E] border border-white/5 overflow-hidden"
+              >
+                <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] opacity-5 pointer-events-none" />
+                <div className="relative z-10">
+                  <div className="flex text-yellow-500 gap-1 mb-6">
+                    {[1, 2, 3, 4, 5].map(i => <ShieldCheck key={i} size={18} fill="currentColor" />)}
+                  </div>
+                  <p className="text-xl md:text-2xl text-white font-medium italic leading-relaxed mb-8">
+                    &quot;{project.testimonial.message}&quot;
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20">
+                      <Image src={project.testimonial.avatar} alt={project.testimonial.name} fill className="object-cover" />
+                    </div>
+                    <div>
+                       <h4 className="font-bold text-white text-lg">{project.testimonial.name}</h4>
+                       <p className="text-white/40 font-bold text-xs uppercase tracking-widest">{project.testimonial.role}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.section>
+            )}
 
             {/* Gallery In-page */}
             <motion.section 

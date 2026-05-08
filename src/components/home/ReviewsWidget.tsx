@@ -117,7 +117,7 @@ export default function ReviewsWidget() {
   }, []);
 
   return (
-    <section className="py-24 bg-muted/30 overflow-hidden relative border-y border-border/50">
+    <section className="py-12 md:py-20 bg-muted/30 overflow-hidden relative border-y border-border/50">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row gap-12 items-center mb-16">
           <div className="md:w-1/3 space-y-4">

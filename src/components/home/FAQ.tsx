@@ -44,7 +44,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 bg-muted/10 relative overflow-hidden">
+    <section id="faq" className="py-12 md:py-20 bg-muted/10 relative overflow-hidden">
       {/* Inject SEO Schema */}
       <script
         type="application/ld+json"

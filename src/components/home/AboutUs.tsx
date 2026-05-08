@@ -28,7 +28,7 @@ const features = [
 
 export default function AboutUs() {
   return (
-    <section id="about" className="py-24 bg-background relative overflow-hidden">
+    <section id="about" className="py-12 md:py-20 bg-background relative overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/5 rounded-l-full blur-3xl -z-10" aria-hidden="true" />
       <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-primary/5 rounded-tr-full blur-3xl -z-10" aria-hidden="true" />

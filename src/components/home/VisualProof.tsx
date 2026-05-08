@@ -37,7 +37,7 @@ const MOMENTS = [
 
 export default function VisualProof() {
   return (
-    <section className="py-24 relative overflow-hidden bg-background">
+    <section className="py-12 md:py-20 relative overflow-hidden bg-background">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent font-black text-[10px] uppercase tracking-widest">

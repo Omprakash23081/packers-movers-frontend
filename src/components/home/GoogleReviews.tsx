@@ -57,26 +57,26 @@ export default function GoogleReviews() {
               <ShieldCheck size={14} /> Verified Social Proof
             </div>
             <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight mb-6">
-              Trusted by Thousands of <br />
+              Trusted by Thousands of <br className="hidden md:block" />
               <span className="text-primary italic">Happy Families.</span>
             </h2>
           </div>
 
-          <div className="bg-background/50 backdrop-blur-md border border-border p-6 rounded-3xl flex items-center gap-6 shadow-xl">
+          <div className="bg-background/50 backdrop-blur-md border border-border p-4 md:p-6 rounded-3xl flex items-center gap-4 md:gap-6 shadow-xl w-full md:w-auto justify-center md:justify-start">
              <div className="text-center">
-                <div className="text-4xl font-black text-white">4.9</div>
-                <div className="flex text-yellow-500 gap-0.5 my-1">
-                  {[1, 2, 3, 4, 5].map(i => <Star key={i} size={14} fill="currentColor" />)}
+                <div className="text-3xl md:text-4xl font-black text-white">4.9</div>
+                <div className="flex text-yellow-500 gap-0.5 my-1 justify-center">
+                  {[1, 2, 3, 4, 5].map(i => <Star key={i} size={12} fill="currentColor" />)}
                 </div>
-                <div className="text-[10px] font-bold text-white/40 uppercase tracking-tighter">842+ Google Reviews</div>
+                <div className="text-[9px] md:text-[10px] font-bold text-white/40 uppercase tracking-tighter">842+ Google Reviews</div>
              </div>
-             <div className="h-12 w-px bg-border" />
-             <div className="flex flex-col gap-1">
-                <div className="flex items-center gap-2 text-xs font-bold text-white/80">
-                   <CheckCircle2 size={14} className="text-emerald-500" /> 100% Verified
+             <div className="h-10 md:h-12 w-px bg-border" />
+             <div className="flex flex-col gap-1 md:gap-1.5">
+                <div className="flex items-center gap-2 text-[11px] md:text-xs font-bold text-white/80">
+                   <CheckCircle2 size={12} className="text-emerald-500 shrink-0" /> 100% Verified
                 </div>
-                <div className="flex items-center gap-2 text-xs font-bold text-white/80">
-                   <CheckCircle2 size={14} className="text-emerald-500" /> Real Customers
+                <div className="flex items-center gap-2 text-[11px] md:text-xs font-bold text-white/80">
+                   <CheckCircle2 size={12} className="text-emerald-500 shrink-0" /> Real Customers
                 </div>
              </div>
           </div>

@@ -46,7 +46,7 @@ const services = [
     title: 'Loading & Unloading',
     description: 'Trained professionals to safely load and unload heavy furniture and delicate boxes using modern equipment.',
     icon: Truck,
-    href: '/services/house-shifting',
+    href: '/services/loading-unloading',
     color: 'text-emerald-500',
     bg: 'bg-emerald-500/10',
     imageUrl: '/images/office-relocation.png' // Fallback
@@ -55,7 +55,7 @@ const services = [
     title: 'Packing & Unpacking',
     description: 'Premium quality packing materials including customized crates, bubble wraps, and corrugated boxes for 100% safety.',
     icon: PackageOpen,
-    href: '/services/house-shifting',
+    href: '/services/packing-unpacking',
     color: 'text-purple-500',
     bg: 'bg-purple-500/10',
     imageUrl: '/images/house-shifting.png' // Fallback
@@ -73,7 +73,7 @@ const services = [
     title: 'Local Shifting',
     description: 'Fast and affordable local moving services within your city. Completed on the same day with full setup assistance.',
     icon: MapPin,
-    href: '/services/house-shifting',
+    href: '/services/local-shifting',
     color: 'text-cyan-500',
     bg: 'bg-cyan-500/10',
     imageUrl: '/images/vehicle-transport.png' // Fallback
@@ -82,7 +82,7 @@ const services = [
 
 export default function ServiceCards() {
   return (
-    <section id="services" className="py-24 bg-background">
+    <section id="services" className="py-12 md:py-20 bg-background">
       <div className="w-full px-0 sm:px-4 md:px-6">
         <div className="text-center mb-16 space-y-4 px-4">
           <h2 className="text-3xl md:text-5xl font-black tracking-tight">
@@ -97,10 +97,10 @@ export default function ServiceCards() {
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              transition={{ delay: index * 0.05, duration: 0.3 }}
               className="w-full"
             >
               <Link href={service.href} className="block group h-full">

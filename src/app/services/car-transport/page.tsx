@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ShieldCheck, Truck, Clock, Navigation, CheckCircle2, MapPin } from 'lucide-react';
+import { ShieldCheck, Truck, Clock, Navigation, CheckCircle2, MapPin, ArrowLeft } from 'lucide-react';
 import NagpurQuoteForm from '@/components/forms/NagpurQuoteForm';
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function CarTransportPage() {
   return (
     <div className="flex flex-col w-full pb-20">
       {/* Hero Section */}
-      <section className="relative w-full h-[60vh] min-h-[500px] flex items-center pt-24 mb-16 overflow-hidden">
+      <section className="relative w-full h-[60vh] min-h-[500px] flex items-center pt-32 mb-16 overflow-hidden">
         <Image 
           src="/images/vehicle-transport.png" 
           alt="Enclosed Car Carrier Transport" 

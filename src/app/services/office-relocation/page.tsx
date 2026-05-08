@@ -13,7 +13,7 @@ export default function OfficeRelocationPage() {
   return (
     <div className="flex flex-col w-full pb-20">
       {/* Hero Section */}
-      <section className="relative w-full h-[60vh] min-h-[500px] flex items-center pt-24 mb-16 overflow-hidden">
+      <section className="relative w-full min-h-[60vh] flex items-center pt-32 pb-16 mb-16 overflow-hidden">
         <Image 
           src="/images/office-relocation.png" 
           alt="Professional Office Relocation Services" 

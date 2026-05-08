@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingButtons from "@/components/layout/FloatingButtons";
+import ScrollMemory from "@/components/layout/ScrollMemory";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -116,6 +117,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col`}
       >
+        <ScrollMemory />
         {/* Local Business SEO Schema */}
         <script
           type="application/ld+json"
@@ -125,8 +127,7 @@ export default function RootLayout({
         />
 
         <Navbar />
-
-        <main className="flex-grow pt-[88px]">{children}</main>
+        <main className="flex-grow pb-20 md:pb-0">{children}</main>
 
         <Footer />
 

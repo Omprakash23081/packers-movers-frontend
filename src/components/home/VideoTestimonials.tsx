@@ -51,12 +51,10 @@ export default function VideoTestimonials() {
     <section className="py-24 bg-background relative overflow-hidden border-y border-border/50">
       <div className="w-full px-4 md:px-6 mb-16">
         <div className="text-center space-y-4">
-          <div className="flex items-center justify-center gap-4 mb-2">
-            <div className="h-px w-12 md:w-24 bg-primary/30" />
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+          <div className="flex flex-col items-center justify-center gap-2 mb-2">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight uppercase leading-tight">
               Real <span className="text-primary italic">Moving Stories</span>
             </h2>
-            <div className="h-px w-12 md:w-24 bg-primary/30" />
           </div>
           <p className="text-muted-foreground text-lg font-medium">
             We made them happy, You could be next
@@ -78,11 +76,11 @@ export default function VideoTestimonials() {
           {marqueeItems.map((item, index) => (
             <div
               key={`${item.id}-${index}`}
-              className="flex flex-col min-w-[320px] md:min-w-[380px] group"
+              className="flex flex-col min-w-[300px] sm:min-w-[340px] md:min-w-[380px] group"
             >
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-white/5 flex">
+              <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl border border-white/5 flex">
                 {/* Left Side: Thumbnail with Play Button */}
-                <div className="relative w-1/2 h-full overflow-hidden">
+                <div className="relative w-[45%] h-full overflow-hidden">
                   <Image
                     src={item.thumbnail}
                     alt={item.clientName}
@@ -98,14 +96,14 @@ export default function VideoTestimonials() {
                 </div>
 
                 {/* Right Side: Brand Info */}
-                <div className="w-1/2 h-full bg-primary p-4 flex flex-col justify-center text-white relative whitespace-normal">
-                  <div className="text-[10px] font-black leading-tight mb-2 opacity-95 uppercase italic line-clamp-3">
+                <div className="w-[55%] h-full bg-primary p-4 md:p-6 flex flex-col justify-center text-white relative whitespace-normal">
+                  <div className="text-[9px] md:text-[10px] font-black leading-tight mb-3 opacity-95 uppercase italic line-clamp-4">
                     NAGPUR'S MOST TRUSTED PACKERS & MOVERS. 15+ YEARS OF EXCELLENCE. 100% SAFE TRANSIT GUARANTEED.
                   </div>
-                  <div className="mt-auto">
-                    <h4 className="text-[11px] font-black uppercase mb-1 truncate">{item.clientName}</h4>
-                    <p className="text-[10px] font-bold opacity-80 uppercase mb-1 truncate">{item.route}</p>
-                    <p className="text-[9px] opacity-70 truncate">{item.gcNo}</p>
+                  <div className="mt-2">
+                    <h4 className="text-[10px] md:text-[11px] font-black uppercase mb-1 truncate">{item.clientName}</h4>
+                    <p className="text-[9px] md:text-[10px] font-bold opacity-80 uppercase mb-1 truncate">{item.route}</p>
+                    <p className="text-[8px] md:text-[9px] opacity-70 truncate">{item.gcNo}</p>
                   </div>
                 </div>
               </div>

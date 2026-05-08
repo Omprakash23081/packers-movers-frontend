@@ -26,7 +26,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen w-full overflow-hidden">
 
       {/* HERO SECTION */}
-      <section className="relative min-h-[calc(100vh-88px)] flex items-center py-16 md:py-24 lg:py-0 overflow-hidden bg-background">
+      <section className="relative min-h-screen flex items-center pt-24 lg:pt-40 pb-12 md:pb-24 lg:py-0 overflow-hidden bg-background">
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
           {/* Abstract mesh and image background */}
           <Image
@@ -55,7 +55,7 @@ export default function Home() {
       </section>
 
       {/* Mobile-only form before calculator */}
-      <div className="lg:hidden w-full px-0 -mt-12 mb-8 relative z-20">
+      <div className="lg:hidden w-full px-0 -mt-8 mb-8 relative z-20">
         <div className="mobile-95-container">
           <HeroForm />
         </div>

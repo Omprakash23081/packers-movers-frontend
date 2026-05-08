@@ -38,7 +38,7 @@ const FEATURES = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section className="py-12 md:py-20 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           
@@ -94,14 +94,14 @@ export default function WhyChooseUs() {
         </div>
 
         {/* SEO Text Block */}
-        <div className="mt-20 p-10 rounded-[2.5rem] bg-primary/5 border border-primary/10">
-          <h3 className="text-2xl font-black mb-6 text-center">Comprehensive Relocation Solutions Across India</h3>
+        <div className="mt-20 p-6 md:p-10 rounded-3xl md:rounded-[2.5rem] bg-primary/5 border border-primary/10">
+          <h3 className="text-xl md:text-2xl font-black mb-6 text-center">Comprehensive Relocation Solutions Across India</h3>
           <div className="columns-1 md:columns-2 gap-12 text-sm text-muted-foreground leading-relaxed font-medium">
             <p className="mb-4">
-              As the leading **Packers and Movers in NCR**, Sunita Cargo offers a wide range of services including house shifting, office relocation, and industrial moves. We dominate local shifting in **Noida, Greater Noida, Ghaziabad, and Delhi**, while providing dedicated long-distance transport to Mumbai, Pune, Bangalore, and Nagpur. Our team is trained in scientific packing methods, ensuring your furniture and electronics stay safe during thousands of kilometers of transit.
+              As the leading <strong className="text-foreground">Packers and Movers in NCR</strong>, Sunita Cargo offers a wide range of services including house shifting, office relocation, and industrial moves. We dominate local shifting in <strong className="text-foreground">Noida, Greater Noida, Ghaziabad, and Delhi</strong>, while providing dedicated long-distance transport to Mumbai, Pune, Bangalore, and Nagpur. Our team is trained in scientific packing methods, ensuring your furniture and electronics stay safe during thousands of kilometers of transit.
             </p>
             <p>
-              Our car and bike transport services use specialized enclosed carriers with **Live GPS Tracking** to prevent road damage and wear-and-tear. We are also known for our secure **warehouse and storage solutions**, providing short-term and long-term space for households and businesses. Whether you are looking for local shifting or domestic relocation, our transparent pricing and commitment to safety make us the preferred choice for thousands of satisfied customers.
+              Our car and bike transport services use specialized enclosed carriers with <strong className="text-foreground">Live GPS Tracking</strong> to prevent road damage and wear-and-tear. We are also known for our secure <strong className="text-foreground">warehouse and storage solutions</strong>, providing short-term and long-term space for households and businesses. Whether you are looking for local shifting or domestic relocation, our transparent pricing and commitment to safety make us the preferred choice for thousands of satisfied customers.
             </p>
           </div>
         </div>

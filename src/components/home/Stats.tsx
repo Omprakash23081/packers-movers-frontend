@@ -30,7 +30,7 @@ function Counter({ from, to }: { from: number; to: number }) {
 
 export default function Stats() {
   return (
-    <section className="py-24 bg-primary text-white border-y border-black/10 relative overflow-hidden">
+    <section className="py-12 md:py-20 bg-primary/5 border-y border-black/10 relative overflow-hidden">
       {/* Decorative Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-secondary opacity-90" />
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10 mix-blend-overlay" />

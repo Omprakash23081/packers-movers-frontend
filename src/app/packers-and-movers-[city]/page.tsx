@@ -27,9 +27,9 @@ export default function CityPage({ params }: { params: { city: string } }) {
   const city = cityParam.charAt(0).toUpperCase() + cityParam.slice(1);
   
   return (
-    <main className="pt-20">
+    <main className="">
       {/* 1. Localized Hero Section */}
-      <section className="bg-gradient-to-br from-[#0B1120] to-blue-900 text-white py-20 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-[#0B1120] to-blue-900 text-white pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 opacity-20 bg-[url('/grid.svg')] bg-center"></div>
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-3xl">

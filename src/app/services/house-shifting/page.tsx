@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Home, PackageCheck, Clock, ShieldCheck, Box, UserCheck } from 'lucide-react';
+import { Home, PackageCheck, Clock, ShieldCheck, Box, UserCheck, CheckCircle2, ArrowLeft } from 'lucide-react';
 import NagpurQuoteForm from '@/components/forms/NagpurQuoteForm';
 
 export const metadata: Metadata = {
@@ -111,6 +111,40 @@ export default function HouseShiftingPage() {
                   </div>
                 </div>
                 <p className="text-xs text-muted-foreground mt-6 text-center">* Final price depends on total volume, floor level, and distance. Contact us for a precise quote.</p>
+              </section>
+
+              <section className="grid sm:grid-cols-2 gap-12">
+                 <div>
+                    <h2 className="text-3xl font-black mb-6">What We Move</h2>
+                    <ul className="space-y-4">
+                       {[
+                         { title: "Fragile Kitchenware", desc: "Fine bone china, glassware, and expensive dinner sets packed in multi-layered bubble wrap." },
+                         { title: "Heavy Electronics", desc: "Double-walled cartons for TVs, Refrigerators, and Washing Machines with internal cushioning." },
+                         { title: "Modern Furniture", desc: "Specialized dismantling for king-size beds, modular wardrobes, and ergonomic chairs." },
+                         { title: "Home Decor & Art", desc: "Customized wooden crates for paintings, mirrors, and delicate sculptures." }
+                       ].map((item, i) => (
+                         <li key={i} className="flex gap-4">
+                            <div className="mt-1 w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                               <CheckCircle2 className="text-primary" size={14} />
+                            </div>
+                            <div>
+                               <h4 className="font-bold text-sm">{item.title}</h4>
+                               <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                            </div>
+                         </li>
+                       ))}
+                    </ul>
+                 </div>
+                 <div className="bg-section p-8 rounded-[2.5rem] border border-border flex flex-col justify-center">
+                    <ShieldCheck size={48} className="text-primary mb-6" />
+                    <h2 className="text-3xl font-black mb-4">The Sunita Cargo <br />Safety Guarantee.</h2>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-6 font-medium">
+                      Every home relocation we handle is backed by our comprehensive damage-protection policy. In the rare event of a scratch or breakage, we provide prompt repair or compensation according to the declared transit insurance.
+                    </p>
+                    <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary">
+                       <ShieldCheck size={14} /> 100% Insured Transit
+                    </div>
+                 </div>
               </section>
 
               <section>
